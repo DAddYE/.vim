@@ -154,6 +154,7 @@ vim_plugin_task "gist-vim",         "git://github.com/mattn/gist-vim.git"
 vim_plugin_task "sinatra",          "git://github.com/hallison/vim-ruby-sinatra.git"
 vim_plugin_task "stylus",           "git://github.com/wavded/vim-stylus.git"
 vim_plugin_task "hammer",           "git://github.com/robgleeson/hammer.vim.git"
+vim_plugin_task "synastic",         "git://github.com/scrooloose/syntastic.git"
 
 vim_plugin_task "molokai" do
   sh "curl https://raw.github.com/mrtazz/molokai.vim/master/colors/molokai.vim > colors/molokai.vim"
