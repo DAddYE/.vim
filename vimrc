@@ -34,8 +34,25 @@ set laststatus=2
 set noequalalways
 
 " NERDTree configuration
+let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
+let NERDTreeMinimalUI=1    " YAGNI
+let NERDTreeChDirMode=1
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 map <Leader>n :NERDTreeToggle<CR>
+
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
 
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
@@ -88,14 +105,6 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
-" Unimpaired configuration
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=1
@@ -127,13 +136,8 @@ set directory=~/.vim/backup
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
-" MacVIM shift+arrow-keys behavior (required in .vimrc)
-let macvim_hig_shift_movement = 1
-
 " % to bounce from do to end etc.
 runtime! macros/matchit.vim
 
 " Show (partial) command in the status line
 set showcmd
-
-source ~/.vim/gvimrc
