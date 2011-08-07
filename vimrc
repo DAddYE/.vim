@@ -36,23 +36,9 @@ set noequalalways
 " NERDTree configuration
 let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
 let NERDTreeMinimalUI=1    " YAGNI
-let NERDTreeChDirMode=1
+let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 map <Leader>n :NERDTreeToggle<CR>
-
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function s:CloseIfOnlyNerdTreeLeft()
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      if winnr("$") == 1
-        q
-      endif
-    endif
-  endif
-endfunction
 
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
@@ -123,11 +109,11 @@ set modeline
 set modelines=10
 
 " Default color scheme
-color molokai
+colorscheme solarized
 
 " Set fonts
 set guioptions=aAce
-set guifont=Courier_New:h13
+set guifont=Menlo:h13
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -141,3 +127,9 @@ runtime! macros/matchit.vim
 
 " Show (partial) command in the status line
 set showcmd
+
+" Windows
+imap <C-w> <Esc><C-w>i
+
+" HIG Shift movement
+" let macvim_hig_shift_movement=1

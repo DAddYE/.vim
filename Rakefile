@@ -134,7 +134,7 @@ vim_plugin_task "haml",             "git://github.com/tpope/vim-haml.git"
 vim_plugin_task "indent_object",    "git://github.com/michaeljsmith/vim-indent-object.git"
 vim_plugin_task "javascript",       "git://github.com/pangloss/vim-javascript.git"
 vim_plugin_task "nerdtree",         "git://github.com/scrooloose/nerdtree.git"
-vim_plugin_task "nerdcommenter",    "git://github.com/ddollar/nerdcommenter.git"
+vim_plugin_task "nerdcommenter",    "git://github.com/scrooloose/nerdcommenter.git"
 vim_plugin_task "surround",         "git://github.com/tpope/vim-surround.git"
 vim_plugin_task "supertab",         "git://github.com/ervandew/supertab.git"
 vim_plugin_task "cucumber",         "git://github.com/tpope/vim-cucumber.git"
@@ -155,17 +155,35 @@ vim_plugin_task "sinatra",          "git://github.com/hallison/vim-ruby-sinatra.
 vim_plugin_task "stylus",           "git://github.com/wavded/vim-stylus.git"
 vim_plugin_task "hammer",           "git://github.com/robgleeson/hammer.vim.git"
 vim_plugin_task "synastic",         "git://github.com/scrooloose/syntastic.git"
+vim_plugin_task "solarized",        "git://github.com/altercation/vim-colors-solarized.git"
+
+vim_plugin_task "command_t",        "http://s3.wincent.com/command-t/releases/command-t-1.2.1.vba" do
+  Dir.chdir "ruby/command-t" do
+    if File.exists?("/usr/bin/ruby1.8") # prefer 1.8 on *.deb systems
+      sh "/usr/bin/ruby1.8 extconf.rb"
+    elsif File.exists?("/usr/bin/ruby") # prefer system rubies
+      sh "/usr/bin/ruby extconf.rb"
+    elsif `rvm > /dev/null 2>&1` && $?.exitstatus == 0
+      sh "rvm system ruby extconf.rb"
+    end
+    sh "make clean && make"
+  end
+end
 
 vim_plugin_task "molokai" do
-  sh "curl https://raw.github.com/mrtazz/molokai.vim/master/colors/molokai.vim > colors/molokai.vim"
+  sh "curl https://raw.github.com/tomasr/molokai/master/colors/molokai.vim > colors/molokai.vim"
 end
+
+
+
 vim_plugin_task "mustache" do
   sh "curl https://raw.github.com/defunkt/mustache/master/contrib/mustache.vim > syntax/mustache.vim"
   File.open(File.expand_path('../ftdetect/mustache.vim', __FILE__), 'w') do |file|
     file << "au BufNewFile,BufRead *.mustache        setf mustache"
   end
 end
-vim_plugin_task "arduino","git://github.com/vim-scripts/Arduino-syntax-file.git" do
+
+vim_plugin_task "arduino", "git://github.com/vim-scripts/Arduino-syntax-file.git" do
   File.open(File.expand_path('../ftdetect/arduino.vim', __FILE__), 'w') do |file|
     file << "au BufNewFile,BufRead *.pde             setf arduino"
   end
