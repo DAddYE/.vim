@@ -128,7 +128,6 @@ end
 
 vim_plugin_task "ack.vim",          "git://github.com/mileszs/ack.vim.git"
 vim_plugin_task "conque",           "http://conque.googlecode.com/files/conque_1.1.tar.gz"
-vim_plugin_task "fugitive",         "git://github.com/tpope/vim-fugitive.git"
 vim_plugin_task "git",              "git://github.com/tpope/vim-git.git"
 vim_plugin_task "haml",             "git://github.com/tpope/vim-haml.git"
 vim_plugin_task "indent_object",    "git://github.com/michaeljsmith/vim-indent-object.git"
@@ -142,7 +141,6 @@ vim_plugin_task "textile",          "git://github.com/timcharper/textile.vim.git
 vim_plugin_task "rspec",            "git://github.com/taq/vim-rspec.git"
 vim_plugin_task "zoomwin",          "git://github.com/vim-scripts/ZoomWin.git"
 vim_plugin_task "snipmate",         "git://github.com/msanders/snipmate.vim.git"
-vim_plugin_task "markdown",         "git://github.com/tpope/vim-markdown.git"
 vim_plugin_task "align",            "git://github.com/tsaleh/vim-align.git"
 vim_plugin_task "unimpaired",       "git://github.com/tpope/vim-unimpaired.git"
 vim_plugin_task "searchfold",       "git://github.com/vim-scripts/searchfold.vim.git"
@@ -153,9 +151,15 @@ vim_plugin_task "scala",            "git://github.com/bdd/vim-scala.git"
 vim_plugin_task "gist-vim",         "git://github.com/mattn/gist-vim.git"
 vim_plugin_task "sinatra",          "git://github.com/hallison/vim-ruby-sinatra.git"
 vim_plugin_task "stylus",           "git://github.com/wavded/vim-stylus.git"
-vim_plugin_task "hammer",           "git://github.com/robgleeson/hammer.vim.git"
 vim_plugin_task "synastic",         "git://github.com/scrooloose/syntastic.git"
 vim_plugin_task "solarized",        "git://github.com/altercation/vim-colors-solarized.git"
+
+vim_plugin_task "hammer",           "git clone git://github.com/robgleeson/hammer.vim.git" do
+  sh 'sudo gem install github-markup'
+  sh 'sudo gem install redcarpet'
+  sh 'sudo gem install RedCloth'
+  sh 'sudo gem install rdoc -v 3.6.1'
+end
 
 vim_plugin_task "command_t",        "http://s3.wincent.com/command-t/releases/command-t-1.2.1.vba" do
   Dir.chdir "ruby/command-t" do
@@ -198,10 +202,6 @@ end
 desc "link vimrc to ~/.vimrc"
 task :link_vimrc do
   %w[ vimrc gvimrc ].each do |file|
-    dest = File.expand_path("~/.#{file}")
-    unless File.exist?(dest)
-      ln_s(File.expand_path("../#{file}", __FILE__), dest)
-    end
   end
 end
 

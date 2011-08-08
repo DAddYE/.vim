@@ -1,5 +1,5 @@
 set nocompatible
-
+set spell
 set number
 set ruler
 syntax on
@@ -128,8 +128,11 @@ runtime! macros/matchit.vim
 " Show (partial) command in the status line
 set showcmd
 
-" Windows
-imap <C-w> <Esc><C-w>i
-
-" HIG Shift movement
+" (i)map shortcut
+imap <C-w> <Esc><C-w>
+imap <C-v> <Esc><C-v>
+imap <C-y> <Esc><C-y>i
+imap <C-e> <Esc><C-e>i
+imap <C-t> <Esc>:CommandT<CR>
+map <C-t> :CommandT<CR>
 " let macvim_hig_shift_movement=1
