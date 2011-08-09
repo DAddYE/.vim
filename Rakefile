@@ -154,14 +154,14 @@ vim_plugin_task "stylus",           "git://github.com/wavded/vim-stylus.git"
 vim_plugin_task "synastic",         "git://github.com/scrooloose/syntastic.git"
 vim_plugin_task "solarized",        "git://github.com/altercation/vim-colors-solarized.git"
 
-vim_plugin_task "hammer",           "git clone git://github.com/robgleeson/hammer.vim.git" do
+vim_plugin_task "hammer", "git://github.com/robgleeson/hammer.vim.git" do
   sh 'sudo gem install github-markup'
   sh 'sudo gem install redcarpet'
   sh 'sudo gem install RedCloth'
   sh 'sudo gem install rdoc -v 3.6.1'
 end
 
-vim_plugin_task "command_t",        "http://s3.wincent.com/command-t/releases/command-t-1.2.1.vba" do
+vim_plugin_task "command_t", "http://s3.wincent.com/command-t/releases/command-t-1.2.1.vba" do
   Dir.chdir "ruby/command-t" do
     if File.exists?("/usr/bin/ruby1.8") # prefer 1.8 on *.deb systems
       sh "/usr/bin/ruby1.8 extconf.rb"
@@ -207,12 +207,12 @@ end
 
 task :clean do
   VIM::Dirs.each { |dir| sh "rm -rf #{dir}" }
-  system "git clean -dfx"
+  sh "git clean -dfx"
 end
 
 desc "Pull the latest"
 task :pull do
-  system "git pull"
+  sh "git pull origin master --force"
 end
 
 task :default => [
