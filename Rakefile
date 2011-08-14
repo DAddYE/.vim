@@ -1,4 +1,4 @@
-# Verbatim copy of 
+# Verbatim copy of janus
 
 module VIM
   Dirs = %w[ after autoload doc plugin ruby snippets syntax ftdetect ftplugin colors indent backup ]
@@ -127,38 +127,40 @@ def skip_vim_plugin(name)
 end
 
 vim_plugin_task "ack.vim",          "git://github.com/mileszs/ack.vim.git"
-vim_plugin_task "conque",           "http://conque.googlecode.com/files/conque_1.1.tar.gz"
+# vim_plugin_task "conque",           "http://conque.googlecode.com/files/conque_1.1.tar.gz"
 vim_plugin_task "git",              "git://github.com/tpope/vim-git.git"
 vim_plugin_task "haml",             "git://github.com/tpope/vim-haml.git"
-vim_plugin_task "indent_object",    "git://github.com/michaeljsmith/vim-indent-object.git"
+# vim_plugin_task "indent_object",    "git://github.com/michaeljsmith/vim-indent-object.git"
 vim_plugin_task "javascript",       "git://github.com/pangloss/vim-javascript.git"
 vim_plugin_task "nerdtree",         "git://github.com/scrooloose/nerdtree.git"
 vim_plugin_task "nerdcommenter",    "git://github.com/scrooloose/nerdcommenter.git"
-vim_plugin_task "surround",         "git://github.com/tpope/vim-surround.git"
+# vim_plugin_task "surround",         "git://github.com/tpope/vim-surround.git"
 vim_plugin_task "supertab",         "git://github.com/ervandew/supertab.git"
 vim_plugin_task "cucumber",         "git://github.com/tpope/vim-cucumber.git"
 vim_plugin_task "textile",          "git://github.com/timcharper/textile.vim.git"
 vim_plugin_task "rspec",            "git://github.com/taq/vim-rspec.git"
 vim_plugin_task "zoomwin",          "git://github.com/vim-scripts/ZoomWin.git"
 vim_plugin_task "snipmate",         "git://github.com/msanders/snipmate.vim.git"
-vim_plugin_task "align",            "git://github.com/tsaleh/vim-align.git"
-vim_plugin_task "unimpaired",       "git://github.com/tpope/vim-unimpaired.git"
-vim_plugin_task "searchfold",       "git://github.com/vim-scripts/searchfold.vim.git"
+# vim_plugin_task "align",            "git://github.com/tsaleh/vim-align.git"
+# vim_plugin_task "unimpaired",       "git://github.com/tpope/vim-unimpaired.git"
+# vim_plugin_task "searchfold",       "git://github.com/vim-scripts/searchfold.vim.git"
 vim_plugin_task "endwise",          "git://github.com/tpope/vim-endwise.git"
-vim_plugin_task "vim-coffee-script","git://github.com/kchmck/vim-coffee-script.git"
-vim_plugin_task "puppet",           "git://github.com/ajf/puppet-vim.git"
+vim_plugin_task "coffee",           "git://github.com/kchmck/vim-coffee-script.git"
+# vim_plugin_task "puppet",           "git://github.com/ajf/puppet-vim.git"
 vim_plugin_task "scala",            "git://github.com/bdd/vim-scala.git"
-vim_plugin_task "gist-vim",         "git://github.com/mattn/gist-vim.git"
+vim_plugin_task "gist",             "git://github.com/mattn/gist-vim.git"
 vim_plugin_task "sinatra",          "git://github.com/hallison/vim-ruby-sinatra.git"
 vim_plugin_task "stylus",           "git://github.com/wavded/vim-stylus.git"
 vim_plugin_task "synastic",         "git://github.com/scrooloose/syntastic.git"
 vim_plugin_task "solarized",        "git://github.com/altercation/vim-colors-solarized.git"
+# vim_plugin_task "css-color",        "git://github.com/skammer/vim-css-color.git"
+vim_plugin_task "git.vim",          "git://github.com/motemen/git-vim.git"
+# vim_plugin_task "tabular",          "git://github.com/godlygeek/tabular.git"
+# vim_plugin_task "quickrun",         "git://github.com/thinca/vim-quickrun.git"
+vim_plugin_task "markdown",         "git://github.com/plasticboy/vim-markdown.git"
 
-vim_plugin_task "hammer", "git://github.com/robgleeson/hammer.vim.git" do
-  sh 'sudo gem install github-markup'
-  sh 'sudo gem install redcarpet'
-  sh 'sudo gem install RedCloth'
-  sh 'sudo gem install rdoc -v 3.6.1'
+vim_plugin_task "css.snippets" do
+  sh 'curl https://raw.github.com/csexton/snipmate.vim/master/snippets/css.snippets > snippets/css.snippets'
 end
 
 vim_plugin_task "command_t", "http://s3.wincent.com/command-t/releases/command-t-1.2.1.vba" do
@@ -177,8 +179,6 @@ end
 vim_plugin_task "molokai" do
   sh "curl https://raw.github.com/tomasr/molokai/master/colors/molokai.vim > colors/molokai.vim"
 end
-
-
 
 vim_plugin_task "mustache" do
   sh "curl https://raw.github.com/defunkt/mustache/master/contrib/mustache.vim > syntax/mustache.vim"
@@ -221,4 +221,4 @@ task :default => [
 ]
 
 desc "Clear out all build artifacts and rebuild the latest Janus"
-task :upgrade => [:clean, :pull, :default]
+task :upgrade => [:clean, :default]

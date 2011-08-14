@@ -28,6 +28,9 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 " Status bar
 set laststatus=2
 
+" Clipboard
+set clipboard=unnamed
+
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
 " This is likely a bludgeon to solve some other issue, but it works
@@ -55,19 +58,11 @@ function s:setupWrapping()
   set textwidth=72
 endfunction
 
-function s:setupMarkup()
-  call s:setupWrapping()
-  map <buffer> <Leader>p :Hammer<CR>
-endfunction
-
 " make uses real tabs
 au FileType make set noexpandtab
 
 " Thorfile, Rakefile, GuardFile, Vagrantfile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-
-" md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+au BufRead,BufNewFile {Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,Do,dorc,Dofile,config.ru} set ft=ruby
 
 " add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
@@ -76,6 +71,9 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 
 " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
+
+" autorun spec
+au BufWritePost *_spec.rb :! rspec %
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -122,17 +120,31 @@ set directory=~/.vim/backup
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
+" Quickrun
+let g:quickrun_config = {}
+let g:quickrun_config._ = {'runner': 'system', 'split': 'below'}
+let g:quickrun_config.rake = {'command': 'rake'}
+let g:quickrun_config.coffee = {'command': 'coffee'}
+let g:quickrun_config.rspec = {'command': 'rspec'}
+let g:quickrun_config.stylus = {'command': 'styus'}
+
 " % to bounce from do to end etc.
 runtime! macros/matchit.vim
 
 " Show (partial) command in the status line
 set showcmd
 
-" (i)map shortcut
+" Custom shortcuts
 imap <C-w> <Esc><C-w>
 imap <C-v> <Esc><C-v>
 imap <C-y> <Esc><C-y>i
 imap <C-e> <Esc><C-e>i
 imap <C-t> <Esc>:CommandT<CR>
 map <C-t> :CommandT<CR>
-" let macvim_hig_shift_movement=1
+map <C-h> gT
+map <C-l> gt
+nmap <Leader>v :tabe $MYVIMRC<CR>
+
+" Fold
+set foldmethod=syntax
+set nofoldenable
