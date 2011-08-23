@@ -142,5 +142,5 @@ set foldmethod=syntax
 set nofoldenable
 
 " Custom Leaders
-nmap <Leader>gc :!git add . && git -a commit && git push<CR>
+nmap <Leader>g :!git add . && git commit -a && git push<CR>
 nmap <Leader>b :!git bash --login<CR>
