@@ -120,14 +120,6 @@ set directory=~/.vim/backup
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
-" Quickrun
-let g:quickrun_config = {}
-let g:quickrun_config._ = {'runner': 'system', 'split': 'below'}
-let g:quickrun_config.rake = {'command': 'rake'}
-let g:quickrun_config.coffee = {'command': 'coffee'}
-let g:quickrun_config.rspec = {'command': 'rspec'}
-let g:quickrun_config.stylus = {'command': 'styus'}
-
 " % to bounce from do to end etc.
 runtime! macros/matchit.vim
 
@@ -143,8 +135,12 @@ imap <C-t> <Esc>:CommandT<CR>
 map <C-t> :CommandT<CR>
 map <C-h> gT
 map <C-l> gt
-nmap <Leader>v :tabe $MYVIMRC<CR>
+nmap <Leader>vi :tabe $MYVIMRC<CR>
 
 " Fold
 set foldmethod=syntax
 set nofoldenable
+
+" Custom Leaders
+nmap <Leader>gc :!git add . && git -a commit && git push<CR>
+nmap <Leader>b :!git bash --login<CR>
