@@ -31,6 +31,9 @@ set laststatus=2
 " Clipboard
 set clipboard=unnamed
 
+" Mouse
+set mouse=a
+
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
 " This is likely a bludgeon to solve some other issue, but it works
@@ -72,8 +75,9 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
-" autorun spec
+" autocmd
 au BufWritePost *_spec.rb :! rspec %
+au BufWritePost *.coffee :!coffee --bare -o public/javascripts -c %
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -93,7 +97,16 @@ cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=1
 
-" gist-vim defaults
+" Quickfix crontab
+" remember to add:
+"   alias crontab="VIM_CRONTAB=true crontab"
+" in ~/.bash_profile
+if $VIM_CRONTAB == "true"
+  set nobackup
+  set nowritebackup
+endif
+
+" Gist-vim defaults
 if has("mac")
   let g:gist_clip_command = 'pbcopy'
 elseif has("unix")
@@ -143,4 +156,6 @@ set nofoldenable
 
 " Custom Leaders
 nmap <Leader>g :!git add . && git commit -a && git push<CR>
-nmap <Leader>b :!git bash --login<CR>
+nmap <Leader>b :!bash --login<CR>
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gp :Git push<CR>

@@ -127,7 +127,6 @@ def skip_vim_plugin(name)
 end
 
 vim_plugin_task "ack.vim",          "git://github.com/mileszs/ack.vim.git"
-vim_plugin_task "git",              "git://github.com/tpope/vim-git.git"
 vim_plugin_task "haml",             "git://github.com/tpope/vim-haml.git"
 vim_plugin_task "javascript",       "git://github.com/pangloss/vim-javascript.git"
 vim_plugin_task "nerdtree",         "git://github.com/scrooloose/nerdtree.git"
@@ -140,13 +139,12 @@ vim_plugin_task "zoomwin",          "git://github.com/vim-scripts/ZoomWin.git"
 vim_plugin_task "snipmate",         "git://github.com/msanders/snipmate.vim.git"
 vim_plugin_task "endwise",          "git://github.com/tpope/vim-endwise.git"
 vim_plugin_task "coffee",           "git://github.com/kchmck/vim-coffee-script.git"
-vim_plugin_task "scala",            "git://github.com/bdd/vim-scala.git"
 vim_plugin_task "gist",             "git://github.com/mattn/gist-vim.git"
 vim_plugin_task "sinatra",          "git://github.com/hallison/vim-ruby-sinatra.git"
 vim_plugin_task "stylus",           "git://github.com/wavded/vim-stylus.git"
 vim_plugin_task "synastic",         "git://github.com/scrooloose/syntastic.git"
 vim_plugin_task "solarized",        "git://github.com/altercation/vim-colors-solarized.git"
-vim_plugin_task "git.vim",          "git://github.com/motemen/git-vim.git"
+vim_plugin_task "fugitive",         "git://github.com/tpope/vim-fugitive.git"
 
 vim_plugin_task "css.snippets" do
   sh 'curl https://raw.github.com/csexton/snipmate.vim/master/snippets/css.snippets > snippets/css.snippets'
