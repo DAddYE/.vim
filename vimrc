@@ -44,6 +44,7 @@ let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
 let NERDTreeMinimalUI=1    " YAGNI
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
+let NERDTreeHijackNetrw=0
 map <Leader>n :NERDTreeToggle<CR>
 
 " ZoomWin configuration
@@ -159,3 +160,6 @@ nmap <Leader>g :!git add . && git commit -a && git push<CR>
 nmap <Leader>b :!bash --login<CR>
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gp :Git push<CR>
+
+" Load custom NERDTree functions
+source ~/.vim/treerc
