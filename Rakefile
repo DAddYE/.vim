@@ -9,6 +9,10 @@ VIM::Dirs.each do |dir|
   directory(dir)
 end
 
+def vim_version
+  @_version ||= `vim --version`.scan(/VIM - Vi IMproved (\d)\.(\d)/).flatten.map(&:to_i)
+end
+
 def vim_plugin_task(name, repo=nil)
   cwd = File.expand_path("../", __FILE__)
   dir = File.expand_path("tmp/#{name}")
@@ -135,7 +139,7 @@ vim_plugin_task "supertab",         "git://github.com/ervandew/supertab.git"
 vim_plugin_task "cucumber",         "git://github.com/tpope/vim-cucumber.git"
 vim_plugin_task "textile",          "git://github.com/timcharper/textile.vim.git"
 vim_plugin_task "rspec",            "git://github.com/taq/vim-rspec.git"
-vim_plugin_task "zoomwin",          "git://github.com/vim-scripts/ZoomWin.git"
+vim_plugin_task "zoomwin",          "git://github.com/vim-scripts/ZoomWin.git" if vim_version[1] > 1
 vim_plugin_task "snipmate",         "git://github.com/msanders/snipmate.vim.git"
 vim_plugin_task "endwise",          "git://github.com/tpope/vim-endwise.git"
 vim_plugin_task "coffee",           "git://github.com/kchmck/vim-coffee-script.git"
