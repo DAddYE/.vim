@@ -1,5 +1,5 @@
 set nocompatible
-set spell
+set nospell
 set number
 set ruler
 syntax on
@@ -34,6 +34,13 @@ set clipboard=unnamed
 " Mouse
 set mouse=a
 
+" History
+set history=1000         " remember more commands and search history
+set undolevels=1000      " use many muchos levels of undo
+
+" Title
+set title
+
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
 " This is likely a bludgeon to solve some other issue, but it works
@@ -46,6 +53,9 @@ let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDTreeHijackNetrw=0
 map <Leader>n :NERDTreeToggle<CR>
+
+" Ctrlp
+let g:ctrlp_working_path_mode = 0
 
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
@@ -60,6 +70,8 @@ function s:setupWrapping()
   set wrap
   set wrapmargin=2
   set textwidth=72
+  set linebreak
+  set nolist
 endfunction
 
 " make uses real tabs
@@ -71,14 +83,14 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,Do,dorc,D
 " add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
 
-au BufRead,BufNewFile *.txt call s:setupWrapping()
+" au BufRead,BufNewFile *.{txt,textile,md,markdown} call s:setupWrapping()
 
 " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
 " autocmd
-au BufWritePost *_spec.rb :! rspec %
 au BufWritePost *.coffee :!coffee --bare -o public/javascripts -c %
+" au BufWritePost *.styl :!stylus -o public/stylesheets -c %
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -120,12 +132,12 @@ let g:gist_open_browser_after_post = 1
 set modeline
 set modelines=10
 
-" Default color scheme
+" Colors
 colorscheme solarized
 
 " Set fonts
 set guioptions=aAce
-set guifont=Menlo:h13
+" set guifont=Menlo:h13
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -149,7 +161,8 @@ imap <C-t> <Esc>:CommandT<CR>
 map <C-t> :CommandT<CR>
 map <C-h> gT
 map <C-l> gt
-nmap <Leader>vi :tabe $MYVIMRC<CR>
+nnoremap , :
+" cmap w!! w !sudo tee % >/dev/null " Allow to edit file with sudo
 
 " Fold
 set foldmethod=syntax
@@ -162,6 +175,7 @@ nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gp :Git push<CR>
 nmap <Leader>f :silent !csstidy % --compress_colors=false --compress_font-weight=false --template=high %<CR>:redraw!<CR>
 nmap <Leader>r :redraw!<CR>
+nmap <Leader>c :nohlsearch<CR>
 
 " Load custom NERDTree functions
 source ~/.vim/treerc

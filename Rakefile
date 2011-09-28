@@ -138,17 +138,18 @@ vim_plugin_task "nerdcommenter",    "git://github.com/scrooloose/nerdcommenter.g
 vim_plugin_task "supertab",         "git://github.com/ervandew/supertab.git"
 vim_plugin_task "cucumber",         "git://github.com/tpope/vim-cucumber.git"
 vim_plugin_task "textile",          "git://github.com/timcharper/textile.vim.git"
-vim_plugin_task "rspec",            "git://github.com/taq/vim-rspec.git"
 vim_plugin_task "zoomwin",          "git://github.com/vim-scripts/ZoomWin.git" if vim_version[1] > 1
 vim_plugin_task "snipmate",         "git://github.com/msanders/snipmate.vim.git"
 vim_plugin_task "endwise",          "git://github.com/tpope/vim-endwise.git"
 vim_plugin_task "coffee",           "git://github.com/kchmck/vim-coffee-script.git"
 vim_plugin_task "gist",             "git://github.com/mattn/gist-vim.git"
-vim_plugin_task "sinatra",          "git://github.com/hallison/vim-ruby-sinatra.git"
 vim_plugin_task "stylus",           "git://github.com/wavded/vim-stylus.git"
 vim_plugin_task "synastic",         "git://github.com/scrooloose/syntastic.git"
 vim_plugin_task "solarized",        "git://github.com/altercation/vim-colors-solarized.git"
 vim_plugin_task "fugitive",         "git://github.com/tpope/vim-fugitive.git"
+vim_plugin_task "tabular",          "git://github.com/godlygeek/tabular.git"
+vim_plugin_task "surround",         "git://github.com/tpope/vim-surround.git"
+vim_plugin_task "cmdp",             "git://github.com/kien/ctrlp.vim.git"
 
 vim_plugin_task "css.snippets" do
   sh 'curl https://raw.github.com/csexton/snipmate.vim/master/snippets/css.snippets > snippets/css.snippets'
