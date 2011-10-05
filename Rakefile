@@ -150,26 +150,15 @@ vim_plugin_task "fugitive",         "git://github.com/tpope/vim-fugitive.git"
 vim_plugin_task "tabular",          "git://github.com/godlygeek/tabular.git"
 vim_plugin_task "surround",         "git://github.com/tpope/vim-surround.git"
 vim_plugin_task "cmdp",             "git://github.com/kien/ctrlp.vim.git"
+vim_plugin_task "less.js",          "git://github.com/lunaru/vim-less.git"
 
 vim_plugin_task "css.snippets" do
   sh 'curl https://raw.github.com/csexton/snipmate.vim/master/snippets/css.snippets > snippets/css.snippets'
 end
 
-vim_plugin_task "command_t", "http://s3.wincent.com/command-t/releases/command-t-1.2.1.vba" do
-  Dir.chdir "ruby/command-t" do
-    if File.exists?("/usr/bin/ruby1.8") # prefer 1.8 on *.deb systems
-      sh "/usr/bin/ruby1.8 extconf.rb"
-    elsif File.exists?("/usr/bin/ruby") # prefer system rubies
-      sh "/usr/bin/ruby extconf.rb"
-    elsif `rvm > /dev/null 2>&1` && $?.exitstatus == 0
-      sh "rvm system ruby extconf.rb"
-    end
-    sh "make clean && make"
-  end
-end
-
-vim_plugin_task "molokai" do
-  sh "curl https://raw.github.com/tomasr/molokai/master/colors/molokai.vim > colors/molokai.vim"
+vim_plugin_task "ar.snippets" do
+  sh 'mkdir -p snippets/ruby'
+  sh 'curl https://raw.github.com/DAddYE/snippets/master/active_model.snippets >> snippets/ruby.snippets'
 end
 
 vim_plugin_task "mustache" do

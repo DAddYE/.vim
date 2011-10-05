@@ -173,7 +173,7 @@ nmap <Leader>g :!git add . && git commit -a && git push<CR>
 nmap <Leader>b :!bash --login<CR>
 nmap <Leader>gs :Gstatus<CR>
 nmap <Leader>gp :Git push<CR>
-nmap <Leader>f :silent !csstidy % --compress_colors=false --compress_font-weight=false --template=high %<CR>:redraw!<CR>
+nmap <Leader>f :silent !csstidy % --compress_colors=false --compress_font-weight=false --template=high --discard_invalid_properties=true --optimise_shorthands=0 %<CR>:redraw!<CR>
 nmap <Leader>r :redraw!<CR>
 nmap <Leader>c :nohlsearch<CR>
 
