@@ -152,6 +152,10 @@ vim_plugin_task "surround",         "git://github.com/tpope/vim-surround.git"
 vim_plugin_task "cmdp",             "git://github.com/kien/ctrlp.vim.git"
 vim_plugin_task "less.js",          "git://github.com/lunaru/vim-less.git"
 
+vim_plugin_task "css3" do
+  sh 'curl http://www.vim.org/scripts/download_script.php?src_id=15153 > syntax/css3.vim'
+end
+
 vim_plugin_task "css.snippets" do
   sh 'curl https://raw.github.com/csexton/snipmate.vim/master/snippets/css.snippets > snippets/css.snippets'
 end

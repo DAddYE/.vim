@@ -89,8 +89,8 @@ au BufNewFile,BufRead *.json set ft=javascript
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
 " autocmd
-au BufWritePost *.coffee :!coffee --bare -o public/javascripts -c %
-" au BufWritePost *.styl :!stylus -o public/stylesheets -c %
+au BufWritePost *.coffee :!coffee -o public/javascripts -b -c %
+" au BufWritePost {app,application}.styl :!stylus -o public/stylesheets -c %
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
