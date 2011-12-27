@@ -153,7 +153,6 @@ vim_plugin_task "tabular",          "git://github.com/godlygeek/tabular.git"
 vim_plugin_task "surround",         "git://github.com/tpope/vim-surround.git"
 vim_plugin_task "cmdp",             "git://github.com/kien/ctrlp.vim.git"
 vim_plugin_task "less.js",          "git://github.com/lunaru/vim-less.git"
-vim_plugin_task "ir_black",         "git://github.com/wgibbs/vim-irblack.git"
 vim_plugin_task "task_paper",       "git://github.com/davidoc/taskpaper.vim.git"
 vim_plugin_task "minitest",         "git://github.com/sunaku/vim-ruby-minitest.git"
 
@@ -163,6 +162,10 @@ end
 
 vim_plugin_task "css3" do
   sh 'curl http://www.vim.org/scripts/download_script.php?src_id=15153 > syntax/css3.vim'
+end
+
+vim_plugin_task "bubblegum" do
+  sh 'curl https://raw.github.com/baskerville/bubblegum/master/bubblegum.vim > colors/bubblegum.vim'
 end
 
 # vim_plugin_task "css.snippets" do
