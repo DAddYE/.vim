@@ -6,10 +6,6 @@ if has("gui_macvim")
   macmenu &File.New\ Tab key=<D-t>
   macmenu &File.Open\ Tab\.\.\. key=<D-^>
 
-  " Command-T for CommandT
-  map <D-T> :CommandT<CR>
-  imap <D-T> <Esc>:CommandT<CR>
-
   " Command-Return for fullscreen
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
   macmenu Window.Select\ Next\ Tab Key=<S-D-Right>
@@ -19,8 +15,8 @@ if has("gui_macvim")
   map <D-F> :Ack<space>
 
   " Command-/ to toggle comments
-  map <D-/> <plug>NERDComToggleComment<CR>
-  imap <D-/> <Esc><plug>NERDComToggleComment<CR>i
+  " map <D-/> <plug>NERDComToggleComment<CR>
+  " imap <D-/> <Esc><plug>NERDComToggleComment<CR>i
 
   " Command-][ to increase/decrease indentation
   vmap <D-]> >gv

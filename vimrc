@@ -2,6 +2,9 @@ set nocompatible
 set nospell
 set number
 set ruler
+set nocursorcolumn
+set nocursorline
+
 syntax on
 
 " Set encoding
@@ -54,11 +57,11 @@ let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDTreeHijackNetrw=0
 map <Leader>n :NERDTreeToggle<CR>
 
+" Taskspaper
+let g:task_paper_date_format = "%d/%m/%y %H:%M"
+
 " Ctrlp
 let g:ctrlp_working_path_mode = 0
-
-" ZoomWin configuration
-map <Leader><Leader> :ZoomWin<CR>
 
 " Remember last location in file
 if has("autocmd")
@@ -89,7 +92,7 @@ au BufNewFile,BufRead *.json set ft=javascript
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
 " autocmd
-au BufWritePost *.coffee :!coffee -o public/javascripts -b -c %
+" au BufWritePost *.coffee :!coffee -o public/javascripts -b -c %
 " au BufWritePost {app,application}.styl :!stylus -o public/stylesheets -c %
 
 " allow backspacing over everything in insert mode
@@ -97,14 +100,6 @@ set backspace=indent,eol,start
 
 " load the plugin and indent settings for the detected filetype
 filetype plugin indent on
-
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
@@ -133,11 +128,12 @@ set modeline
 set modelines=10
 
 " Colors
-colorscheme solarized
+set background=dark
+colorscheme bubblegum
 
 " Set fonts
 set guioptions=aAce
-" set guifont=Menlo:h13
+set guifont=Inconsolata:h13
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -152,30 +148,30 @@ runtime! macros/matchit.vim
 " Show (partial) command in the status line
 set showcmd
 
-" Custom shortcuts
-imap <C-w> <Esc><C-w>
-imap <C-v> <Esc><C-v>
-imap <C-y> <Esc><C-y>i
-imap <C-e> <Esc><C-e>i
-imap <C-t> <Esc>:CommandT<CR>
-map <C-t> :CommandT<CR>
-map <C-h> gT
-map <C-l> gt
-nnoremap , :
-" cmap w!! w !sudo tee % >/dev/null " Allow to edit file with sudo
-
 " Fold
 set foldmethod=syntax
 set nofoldenable
 
-" Custom Leaders
-nmap <Leader>g :!git add . && git commit -a && git push<CR>
-nmap <Leader>b :!bash --login<CR>
-nmap <Leader>gs :Gstatus<CR>
-nmap <Leader>gp :Git push<CR>
+" Minitest autocompletion
+set completefunc=syntaxcomplete#Complete
+
+" Shortcuts
+imap <C-w> <Esc><C-w>
+imap <C-v> <Esc><C-v>
+imap <C-y> <Esc><C-y>i
+map <C-e> <Esc><C-e>i
+map <C-h> gT
+map <C-l> gt
+nnoremap . :
+map zz :ZoomWin<CR>
+map gc :!git add . && git commit -a && git push<CR>
+map bb :!bash --login<CR>
+map gs :Gstatus<CR>
+map gp :Git push<CR>
 nmap <Leader>f :silent !csstidy % --compress_colors=false --compress_font-weight=false --template=high --discard_invalid_properties=true --optimise_shorthands=0 %<CR>:redraw!<CR>
-nmap <Leader>r :redraw!<CR>
+map rr :redraw!<CR>
 nmap <Leader>c :nohlsearch<CR>
+" cmap w!! w !sudo tee % >/dev/null " Allow to edit file with sudo
 
 " Load custom NERDTree functions
 source ~/.vim/treerc
