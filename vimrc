@@ -51,7 +51,8 @@ set noequalalways
 
 " NERDTree configuration
 let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
-let NERDTreeMinimalUI=1    " YAGNI
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=0
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDTreeHijackNetrw=0

@@ -1,7 +1,7 @@
 # Verbatim copy of janus
 
 module VIM
-  Dirs = %w[ after autoload doc compiler plugin ruby snippets syntax ftdetect ftplugin colors indent backup ]
+  Dirs = %w[ after autoload doc compiler plugin ruby snippets syntax ftdetect ftplugin colors indent backup nerdtree_plugin ]
 end
 
 directory "tmp"
@@ -131,9 +131,9 @@ def skip_vim_plugin(name)
 end
 
 vim_plugin_task "delimitmate",      "git://github.com/Raimondi/delimitMate.git"
-vim_plugin_task "conque",           "git://github.com/rson/vim-conque.git"
 vim_plugin_task "ack.vim",          "git://github.com/mileszs/ack.vim.git"
 vim_plugin_task "haml",             "git://github.com/tpope/vim-haml.git"
+vim_plugin_task "slim",             "git://github.com/bbommarito/vim-slim.git"
 vim_plugin_task "javascript",       "git://github.com/pangloss/vim-javascript.git"
 vim_plugin_task "nerdtree",         "git://github.com/scrooloose/nerdtree.git"
 vim_plugin_task "commentary",       "git://github.com/tpope/vim-commentary.git"
@@ -168,26 +168,6 @@ vim_plugin_task "bubblegum" do
   sh 'curl https://raw.github.com/baskerville/bubblegum/master/bubblegum.vim > colors/bubblegum.vim'
 end
 
-# vim_plugin_task "css.snippets" do
-#   sh 'curl https://raw.github.com/csexton/snipmate.vim/master/snippets/css.snippets > snippets/css.snippets'
-# end
-
-# vim_plugin_task "molokai" do
-#   sh "curl https://raw.github.com/mrtazz/molokai.vim/master/colors/molokai.vim > colors/molokai.vim"
-# end
-
-# vim_plugin_task "vwilight" do
-#   sh "curl https://raw.github.com/gist/796172/724c7ca237a7f6b8d857c4ac2991cfe5ffb18087 > colors/vwilight.vim"
-# end
-
-# vim_plugin_task "blackboard" do
-#   sh "curl https://raw.github.com/nelstrom/vim-blackboard/master/colors/blackboard.vim > colors/blackboard.vim"
-# end
-
-# vim_plugin_task "github" do
-#   sh "curl https://raw.github.com/joshuaclayton/dotfiles/master/vim/colors/github.vim > colors/github.vim"
-# end
-
 vim_plugin_task "ar.snippets" do
   sh 'mkdir -p snippets/ruby'
   sh 'curl https://raw.github.com/DAddYE/snippets/master/active_model.snippets >> snippets/ruby.snippets'
@@ -204,18 +184,6 @@ vim_plugin_task "arduino", "git://github.com/vim-scripts/Arduino-syntax-file.git
   File.open(File.expand_path('../ftdetect/arduino.vim', __FILE__), 'w') do |file|
     file << "au BufNewFile,BufRead *.pde             setf arduino"
   end
-end
-
-vim_plugin_task "lucius" do
-  sh "curl http://www.vim.org/scripts/download_script.php?src_id=16615 > colors/lucius.vim"
-end
-
-vim_plugin_task 'xoria256' do
-  sh 'curl http://www.vim.org/scripts/download_script.php?src_id=15762 > colors/xoria256.vim'
-end
-
-vim_plugin_task 'twilight256' do
-  sh 'curl http://www.vim.org/scripts/download_script.php?src_id=14937 > colors/twilight256.vim'
 end
 
 desc "Update the documentation"
