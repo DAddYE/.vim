@@ -37,17 +37,8 @@ set clipboard=unnamed
 " Mouse
 set mouse=a
 
-" History
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
-
 " Title
 set title
-
-" Without setting this, ZoomWin restores windows in a way that causes
-" equalalways behavior to be triggered the next time CommandT is used.
-" This is likely a bludgeon to solve some other issue, but it works
-set noequalalways
 
 " NERDTree configuration
 let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
@@ -57,6 +48,7 @@ let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDTreeHijackNetrw=0
 map <Leader>n :NERDTreeToggle<CR>
+autocmd vimenter * if !argc() | NERDTree | endif
 
 " Taskspaper
 let g:task_paper_date_format = "%d/%m/%y %H:%M"
@@ -70,14 +62,6 @@ if has("autocmd")
     \| exe "normal g'\"" | endif
 endif
 
-function s:setupWrapping()
-  set wrap
-  set wrapmargin=2
-  set textwidth=72
-  set linebreak
-  set nolist
-endfunction
-
 " make uses real tabs
 au FileType make set noexpandtab
 
@@ -87,14 +71,8 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,Do,dorc,D
 " add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
 
-" au BufRead,BufNewFile *.{txt,textile,md,markdown} call s:setupWrapping()
-
 " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
-
-" autocmd
-" au BufWritePost *.coffee :!coffee -o public/javascripts -b -c %
-" au BufWritePost {app,application}.styl :!stylus -o public/stylesheets -c %
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -106,39 +84,17 @@ filetype plugin indent on
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=1
 
-" Quickfix crontab
-" remember to add:
-"   alias crontab="VIM_CRONTAB=true crontab"
-" in ~/.bash_profile
-if $VIM_CRONTAB == "true"
-  set nobackup
-  set nowritebackup
-endif
-
-" Gist-vim defaults
-if has("mac")
-  let g:gist_clip_command = 'pbcopy'
-elseif has("unix")
-  let g:gist_clip_command = 'xclip -selection clipboard'
-endif
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
-
 " Use modeline overrides
 set modeline
 set modelines=10
 
 " Colors
 set background=dark
-colorscheme bubblegum
+colorscheme pong
 
 " Set fonts
 set guioptions=aAce
 set guifont=Inconsolata:h13
-
-" Directories for swp files
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
 
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
@@ -148,10 +104,6 @@ runtime! macros/matchit.vim
 
 " Show (partial) command in the status line
 set showcmd
-
-" Fold
-set foldmethod=syntax
-set nofoldenable
 
 " Minitest autocompletion
 set completefunc=syntaxcomplete#Complete
@@ -164,15 +116,13 @@ map <C-e> <Esc><C-e>i
 map <C-h> gT
 map <C-l> gt
 nnoremap . :
-map zz :ZoomWin<CR>
 map gc :!git add . && git commit -a && git push<CR>
 map bb :!bash --login<CR>
 map gs :Gstatus<CR>
 map gp :Git push<CR>
-nmap <Leader>f :silent !csstidy % --compress_colors=false --compress_font-weight=false --template=high --discard_invalid_properties=true --optimise_shorthands=0 %<CR>:redraw!<CR>
 map rr :redraw!<CR>
 nmap <Leader>c :nohlsearch<CR>
 " cmap w!! w !sudo tee % >/dev/null " Allow to edit file with sudo
 
 " Load custom NERDTree functions
-source ~/.vim/treerc
+" source ~/.vim/treerc
