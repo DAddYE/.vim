@@ -2,13 +2,11 @@ set nocompatible
 set nospell
 set number
 set ruler
-set nocursorcolumn
-set nocursorline
+" set nocursorcolumn
+" set nocursorline
+set encoding=utf-8
 
 syntax on
-
-" Set encoding
-set encoding=utf-8
 
 " Whitespace stuff
 set nowrap
@@ -16,8 +14,15 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set list listchars=tab:\ \ ,trail:·
 
+" List chars
+set listchars=""                  " Reset the listchars
+set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
+set listchars+=trail:.            " show trailing spaces as dots
+set listchars+=extends:>          " The character to show in the last column when wrap is
+                                  " off and the line continues beyond the right of the screen
+set listchars+=precedes:<         " The character to show in the last column when wrap is
+                                  " off and the line continues beyond the right of the screen
 " Searching
 set hlsearch
 set incsearch
@@ -26,7 +31,23 @@ set smartcase
 
 " Tab completion
 set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+
+" Disable output and VCS files
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.class,.svn,*.gem
+
+" Disable archive files
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+
+" Ignore bundler and sass cache
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
+
+" Disable temp and backup files
+set wildignore+=*.swp,*~,._*
+
+"" Backup and swap files
+
+set backupdir=~/.vim/backup/ " where to put backup files.
+set directory=~/.vim/tmp/    " where to put swap files.
 
 " Status bar
 set laststatus=2
@@ -56,11 +77,10 @@ let g:task_paper_date_format = "%d/%m/%y %H:%M"
 " Ctrlp
 let g:ctrlp_working_path_mode = 0
 
-" Remember last location in file
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal g'\"" | endif
-endif
+" Remember last location in file, but not for commit messages.
+" see :help last-position-jump
+au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+  \| exe "normal! g`\"" | endif
 
 " make uses real tabs
 au FileType make set noexpandtab
