@@ -23,6 +23,7 @@ vim_plugin_task 'cmdp',             'git://github.com/kien/ctrlp.vim.git'
 vim_plugin_task 'less.js',          'git://github.com/lunaru/vim-less.git'
 vim_plugin_task 'task_paper',       'git://github.com/davidoc/taskpaper.vim.git'
 vim_plugin_task 'minitest',         'git://github.com/sunaku/vim-ruby-minitest.git'
+vim_plugin_task 'zoomwin',          'git://github.com/blueyed/ZoomWin.git'
 
 vim_plugin_task 'nginx' do
   sh 'curl http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'

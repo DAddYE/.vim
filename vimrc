@@ -2,8 +2,8 @@ set nocompatible
 set nospell
 set number
 set ruler
-" set nocursorcolumn
-" set nocursorline
+set nocursorcolumn
+set nocursorline
 set encoding=utf-8
 
 syntax on
@@ -16,13 +16,8 @@ set softtabstop=2
 set expandtab
 
 " List chars
-set listchars=""                  " Reset the listchars
-set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
-set listchars+=trail:.            " show trailing spaces as dots
-set listchars+=extends:>          " The character to show in the last column when wrap is
-                                  " off and the line continues beyond the right of the screen
-set listchars+=precedes:<         " The character to show in the last column when wrap is
-                                  " off and the line continues beyond the right of the screen
+set list listchars=tab:\ \ ,trail:·
+
 " Searching
 set hlsearch
 set incsearch
@@ -67,7 +62,7 @@ let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=0
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-let NERDTreeHijackNetrw=0
+let NERDTreeHijackNetrw=1
 map <Leader>n :NERDTreeToggle<CR>
 autocmd vimenter * if !argc() | NERDTree | endif
 
@@ -137,6 +132,7 @@ map <C-h> gT
 map <C-l> gt
 nnoremap . :
 map gc :!git add . && git commit -a && git push<CR>
+map zz :ZoomWin<CR>
 map bb :!bash --login<CR>
 map gs :Gstatus<CR>
 map gp :Git push<CR>
