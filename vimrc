@@ -16,6 +16,7 @@ set softtabstop=2
 set expandtab
 
 " List chars
+" set list listchars=trail:·,tab:››
 set list listchars=tab:\ \ ,trail:·
 
 " Searching
@@ -104,12 +105,12 @@ set modeline
 set modelines=10
 
 " Colors
-set background=dark
-colorscheme pong
+" set background=dark
+colorscheme solarized
 
 " Set fonts
-set guioptions=aAce
-set guifont=Inconsolata:h13
+" set guioptions=aAce
+" set guifont=Inconsolata:h13
 
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
