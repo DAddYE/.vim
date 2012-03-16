@@ -25,6 +25,7 @@ vim_plugin_task 'task_paper',       'git://github.com/davidoc/taskpaper.vim.git'
 vim_plugin_task 'minitest',         'git://github.com/sunaku/vim-ruby-minitest.git'
 vim_plugin_task 'zoomwin',          'git://github.com/blueyed/ZoomWin.git'
 vim_plugin_task 'jade',             'git://github.com/digitaltoad/vim-jade.git'
+vim_plugin_task 'scala',            'git://github.com/rosstimson/scala-vim-support.git'
 
 vim_plugin_task 'nginx' do
   sh 'curl http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'

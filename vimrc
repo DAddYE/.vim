@@ -131,7 +131,7 @@ imap <C-y> <Esc><C-y>i
 map <C-e> <Esc><C-e>i
 map <C-h> gT
 map <C-l> gt
-nnoremap . :
+"nnoremap . :
 map gc :!git add . && git commit -a && git push<CR>
 map zz :ZoomWin<CR>
 map bb :!bash --login<CR>
@@ -139,6 +139,10 @@ map gs :Gstatus<CR>
 map gp :Git push<CR>
 map rr :redraw!<CR>
 nmap <Leader>c :nohlsearch<CR>
+" Replace currently selected text with default register
+" without yanking it
+vnoremap p "_dp
+
 " cmap w!! w !sudo tee % >/dev/null " Allow to edit file with sudo
 
 " Load custom NERDTree functions
