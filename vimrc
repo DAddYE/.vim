@@ -66,6 +66,7 @@ let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDTreeHijackNetrw=1
 map <Leader>n :NERDTreeToggle<CR>
 autocmd vimenter * if !argc() | NERDTree | endif
+autocmd BufLeave,FocusLost * silent! wall
 
 " Taskspaper
 let g:task_paper_date_format = "%d/%m/%y %H:%M"
@@ -76,7 +77,7 @@ let g:ctrlp_working_path_mode = 0
 " Remember last location in file, but not for commit messages.
 " see :help last-position-jump
 au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
-  \| exe "normal! g`\"" | endif
+      \| exe "normal! g`\"" | endif
 
 " make uses real tabs
 au FileType make set noexpandtab
@@ -105,7 +106,11 @@ set modeline
 set modelines=10
 
 " Colors
-" set background=dark
+set background=light
+let g:solarized_hitrail=1    "default value is 0
+" let g:solarized_termcolors=256
+" let g:solarized_degrade=1
+let g:solarized_termtrans=1
 colorscheme solarized
 
 " Set fonts
@@ -124,26 +129,98 @@ set showcmd
 " Minitest autocompletion
 set completefunc=syntaxcomplete#Complete
 
+let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=0
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
+let NERDTreeHijackNetrw=0
+
+" Save on lost focus
+autocmd BufLeave,FocusLost * silent! wall
+
+" NERDTree configuration
+" autocmd vimenter * if !argc() | NERDTree | endif
+augroup AuNERDTreeCmd
+autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
+
+" If the parameter is a directory, cd into it
+function s:CdIfDirectory(directory)
+  let explicitDirectory = isdirectory(a:directory)
+  let directory = explicitDirectory || empty(a:directory)
+
+  if explicitDirectory
+    exe "cd " . fnameescape(a:directory)
+  endif
+
+  " Allows reading from stdin
+  " ex: git diff | mvim -R -
+  if strlen(a:directory) == 0
+    return
+  endif
+
+  if directory
+    NERDTree
+    wincmd p
+    bd
+  endif
+
+  if explicitDirectory
+    wincmd p
+  endif
+endfunction
+
+" NERDTree utility function
+function s:UpdateNERDTree(...)
+  let stay = 0
+
+  if(exists("a:1"))
+    let stay = a:1
+  end
+
+  if exists("t:NERDTreeBufName")
+    let nr = bufwinnr(t:NERDTreeBufName)
+    if nr != -1
+      exe nr . "wincmd w"
+      exe substitute(mapcheck("R"), "<CR>", "", "")
+      if !stay
+        wincmd p
+      end
+    endif
+  endif
+endfunction
+
 " Shortcuts
 imap <C-w> <Esc><C-w>
 imap <C-v> <Esc><C-v>
 imap <C-y> <Esc><C-y>i
+map <Leader>n :NERDTreeToggle<CR>
 map <C-e> <Esc><C-e>i
 map <C-h> gT
 map <C-l> gt
-"nnoremap . :
 map gc :!git add . && git commit -a && git push<CR>
 map zz :ZoomWin<CR>
 map bb :!bash --login<CR>
 map gs :Gstatus<CR>
 map gp :Git push<CR>
-map rr :redraw!<CR>
+map rr :redraw! \| :NERDTree<CR>
 nmap <Leader>c :nohlsearch<CR>
+
+" format the entire file
+nmap <leader>fef ggVG=
+
+" Map the arrow keys to be based on display lines, not physical lines
+map <Down> gj
+map <Up> gk
+
+" Tagbar
+map <Leader>rt :TagbarToggle<CR>
+map rt :TagbarToggle<CR>
+
 " Replace currently selected text with default register
 " without yanking it
-vnoremap p "_dp
-
-" cmap w!! w !sudo tee % >/dev/null " Allow to edit file with sudo
-
-" Load custom NERDTree functions
-" source ~/.vim/treerc
+" vnoremap p "_dp
+" use :w!! to write to a file using sudo if you forgot to 'sudo vim file'
+" (it will prompt for sudo password when writing)
+" cmap w!! %!sudo tee > /dev/null %
