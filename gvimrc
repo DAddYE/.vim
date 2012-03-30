@@ -1,8 +1,10 @@
 set anti
 set guioptions=egmrt
+set transparency=5
 
 " Macvim colorscheme
-colorscheme macvim
+" let g:molokai_original = 1
+" colorscheme molokai
 
 " Automatically resize splits when resizing MacVim window
 autocmd VimResized * wincmd =

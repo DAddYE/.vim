@@ -106,11 +106,12 @@ set modeline
 set modelines=10
 
 " Colors
-set background=light
-let g:solarized_hitrail=1    "default value is 0
+" set background=light
+" let g:solarized_hitrail=1    "default value is 0
 " let g:solarized_termcolors=256
 " let g:solarized_degrade=1
 let g:solarized_termtrans=1
+" let g:molokai_original=1
 colorscheme solarized
 
 " Set fonts
@@ -138,6 +139,9 @@ let NERDTreeHijackNetrw=0
 
 " Save on lost focus
 autocmd BufLeave,FocusLost * silent! wall
+
+" Powerline
+let g:Powerline_symbols = 'fancy'
 
 " NERDTree configuration
 " autocmd vimenter * if !argc() | NERDTree | endif

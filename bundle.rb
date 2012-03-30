@@ -1,7 +1,7 @@
 # Verbatim copy of janus
 
 module VIM
-  Dirs = %w[ after autoload doc compiler plugin ruby snippets syntax ftdetect ftplugin colors indent backup nerdtree_plugin ]
+  Dirs = %w[ after autoload doc compiler plugin snippets syntax syntax_checkers ftdetect ftplugin colors indent backup nerdtree_plugin ]
 end
 
 directory "tmp"
