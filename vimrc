@@ -5,12 +5,10 @@ set number
 set nocursorcolumn
 set nocursorline
 set encoding=utf-8
-set cursorline
 set title
 set shortmess=atI " don't sho intro messages
 set report=0      " tell us about changes
 set backspace=indent,eol,start " allow backspacing over everything in insert mode"
-set nolazyredraw  " turn off lazy redraw
 set nowrap
 set tabstop=2
 set shiftwidth=2
@@ -37,20 +35,20 @@ set showmode
 set completefunc=syntaxcomplete#Complete " Minitest autocompletion
 set backupdir=~/.vim/backup/ " where to put backup files.
 set directory=~/.vim/tmp/    " where to put swap files.
-set undodir=~/.vim/undo
+set undodir=~/.vim/undo/
 set nostartofline " Don’t reset cursor to start of line when moving around.
 set esckeys " Allow cursor keys in insert mode
 set ttyfast " Optimize for fast terminal connections
 
 " Colors & C.
-set background=dark         " Assume a dark background
-colorscheme tomorrow
 set guioptions=aAce
+set background=dark         " Assume a dark background
 " let g:solarized_termtrans=1
 " let g:solarized_termcolors=256
 " let g:solarized_contrast="high"
 " let g:solarized_visibility="high"
 " colorscheme solarized
+colorscheme tomorrow
 
 filetype plugin indent on      " load the plugin and indent settings for the detected filetype
 " runtime! macros/matchit.vim    " % to bounce from do to end etc.

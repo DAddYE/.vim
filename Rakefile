@@ -42,7 +42,7 @@ vim_plugin_task 'pong' do
 end
 
 vim_plugin_task 'tomorrow' do
-  sh 'curl -sL https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night.vim > tomorrow.vim'
+  sh 'curl -sL https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night.vim > colors/tomorrow.vim'
 end
 
 vim_plugin_task 'ar.snippets' do

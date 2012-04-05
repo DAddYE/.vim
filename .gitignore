@@ -14,4 +14,7 @@ ftdetect
 ftplugin
 colors
 indent
+spell
+compiler
 .VimballRecord
+Powerline_default_default_fancy
