@@ -1,7 +1,7 @@
 require File.expand_path('../bundle.rb', __FILE__)
 
 vim_plugin_task 'delimitmate',      'git://github.com/Raimondi/delimitMate.git'
-vim_plugin_task 'ack.vim',          'git://github.com/mileszs/ack.vim.git'
+vim_plugin_task 'ack',              'git://github.com/mileszs/ack.vim.git'
 vim_plugin_task 'haml',             'git://github.com/tpope/vim-haml.git'
 vim_plugin_task 'slim',             'git://github.com/bbommarito/vim-slim.git'
 vim_plugin_task 'javascript',       'git://github.com/pangloss/vim-javascript.git'
@@ -28,6 +28,7 @@ vim_plugin_task 'jade',             'git://github.com/digitaltoad/vim-jade.git'
 vim_plugin_task 'scala',            'git://github.com/rosstimson/scala-vim-support.git'
 vim_plugin_task 'powerline',        'git://github.com/Lokaltog/vim-powerline.git'
 vim_plugin_task 'tagbar',           'git://github.com/majutsushi/tagbar.git'
+vim_plugin_task 'tomorrow',         'git://github.com/chriskempson/vim-tomorrow-theme.git'
 
 vim_plugin_task 'nginx' do
   sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'
@@ -39,10 +40,6 @@ end
 
 vim_plugin_task 'pong' do
   sh 'curl -sL https://raw.github.com/gist/1617275/pong.vim > colors/pong.vim'
-end
-
-vim_plugin_task 'tomorrow' do
-  sh 'curl -sL https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night.vim > colors/tomorrow.vim'
 end
 
 vim_plugin_task 'ar.snippets' do
