@@ -1,61 +1,66 @@
 set nocompatible
+syntax on
 set nospell
 set number
-set ruler
 set nocursorcolumn
 set nocursorline
 set encoding=utf-8
-
-syntax on
-
-" Whitespace stuff
+set cursorline
+set title
+set shortmess=atI " don't sho intro messages
+set report=0      " tell us about changes
+set backspace=indent,eol,start " allow backspacing over everything in insert mode"
+set nolazyredraw  " turn off lazy redraw
 set nowrap
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-
-" List chars
-" set list listchars=trail:·,tab:››
+set ruler
 set list listchars=tab:\ \ ,trail:·
-
-" Searching
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-
-" Tab completion
-set wildmode=list:longest,list:full
-
-" Disable output and VCS files
+set laststatus=2
+set clipboard=unnamed
+set mouse=a
+set modeline
+set modelines=10
+set wildmode=list:longest,list:full  " Tab completion
 set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.class,.svn,*.gem
-
-" Disable archive files
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
-
-" Ignore bundler and sass cache
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
-
-" Disable temp and backup files
 set wildignore+=*.swp,*~,._*
-
-"" Backup and swap files
-
+set showcmd " Show (partial) command in the status line"
+set showmode
+set completefunc=syntaxcomplete#Complete " Minitest autocompletion
 set backupdir=~/.vim/backup/ " where to put backup files.
 set directory=~/.vim/tmp/    " where to put swap files.
+set undodir=~/.vim/undo
+set nostartofline " Don’t reset cursor to start of line when moving around.
+set esckeys " Allow cursor keys in insert mode
+set ttyfast " Optimize for fast terminal connections
 
-" Status bar
-set laststatus=2
+" Colors & C.
+set background=dark         " Assume a dark background
+colorscheme tomorrow
+set guioptions=aAce
+" let g:solarized_termtrans=1
+" let g:solarized_termcolors=256
+" let g:solarized_contrast="high"
+" let g:solarized_visibility="high"
+" colorscheme solarized
 
-" Clipboard
-set clipboard=unnamed
+filetype plugin indent on      " load the plugin and indent settings for the detected filetype
+" runtime! macros/matchit.vim    " % to bounce from do to end etc.
 
-" Mouse
-set mouse=a
+" Change mapleader
+let mapleader=","
 
-" Title
-set title
+" Verical bar in insert mode
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " NERDTree configuration
 let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
@@ -91,45 +96,15 @@ au BufNewFile,BufRead *.json set ft=javascript
 " make Python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-" load the plugin and indent settings for the detected filetype
-filetype plugin indent on
-
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=1
 
-" Use modeline overrides
-set modeline
-set modelines=10
-
-" Colors
-" set background=light
-" let g:solarized_hitrail=1    "default value is 0
-" let g:solarized_termcolors=256
-" let g:solarized_degrade=1
-let g:solarized_termtrans=1
-" let g:molokai_original=1
-colorscheme solarized
-
-" Set fonts
-" set guioptions=aAce
-" set guifont=Inconsolata:h13
 
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
-" % to bounce from do to end etc.
-runtime! macros/matchit.vim
-
-" Show (partial) command in the status line
-set showcmd
-
-" Minitest autocompletion
-set completefunc=syntaxcomplete#Complete
-
+" NerdTREE config
 let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=0

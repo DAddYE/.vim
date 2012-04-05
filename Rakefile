@@ -30,24 +30,28 @@ vim_plugin_task 'powerline',        'git://github.com/Lokaltog/vim-powerline.git
 vim_plugin_task 'tagbar',           'git://github.com/majutsushi/tagbar.git'
 
 vim_plugin_task 'nginx' do
-  sh 'curl http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'
+  sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'
 end
 
 vim_plugin_task 'css3' do
-  sh 'curl http://www.vim.org/scripts/download_script.php?src_id=15153 > syntax/css3.vim'
+  sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=15153 > syntax/css3.vim'
 end
 
 vim_plugin_task 'pong' do
-  sh 'curl https://raw.github.com/gist/1617275/92a940bacb186dccfed9dba265b103e40a2377ad/pong.vim > colors/pong.vim'
+  sh 'curl -sL https://raw.github.com/gist/1617275/pong.vim > colors/pong.vim'
+end
+
+vim_plugin_task 'tomorrow' do
+  sh 'curl -sL https://raw.github.com/chriskempson/tomorrow-theme/master/vim/colors/Tomorrow-Night.vim > tomorrow.vim'
 end
 
 vim_plugin_task 'ar.snippets' do
   sh 'mkdir -p snippets/ruby'
-  sh 'curl https://raw.github.com/DAddYE/snippets/master/active_model.snippets >> snippets/ruby.snippets'
+  sh 'curl -sL https://raw.github.com/DAddYE/snippets/master/active_model.snippets >> snippets/ruby.snippets'
 end
 
 vim_plugin_task 'mustache' do
-  sh 'curl https://raw.github.com/defunkt/mustache/master/contrib/mustache.vim > syntax/mustache.vim'
+  sh 'curl -sL https://raw.github.com/defunkt/mustache/master/contrib/mustache.vim > syntax/mustache.vim'
   File.open(File.expand_path('../ftdetect/mustache.vim', __FILE__), 'w') do |file|
     file << 'au BufNewFile,BufRead *.mustache        setf mustache'
   end
