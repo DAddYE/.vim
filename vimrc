@@ -49,7 +49,7 @@ set background=dark         " Assume a dark background
 " let g:solarized_contrast="high"
 " let g:solarized_visibility="high"
 " colorscheme solarized
-colorscheme Tomorrow-256
+colorscheme Tomorrow-Night
 
 filetype plugin indent on      " load the plugin and indent settings for the detected filetype
 " runtime! macros/matchit.vim    " % to bounce from do to end etc.
