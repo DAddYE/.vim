@@ -35,7 +35,7 @@ set showmode
 set completefunc=syntaxcomplete#Complete " Minitest autocompletion
 set backupdir=~/.vim/backup/ " where to put backup files.
 set directory=~/.vim/tmp/    " where to put swap files.
-set undodir=~/.vim/undo/
+" set undodir=~/.vim/undo/
 set nostartofline " Don’t reset cursor to start of line when moving around.
 set esckeys " Allow cursor keys in insert mode
 set ttyfast " Optimize for fast terminal connections
@@ -49,7 +49,7 @@ set background=dark         " Assume a dark background
 " let g:solarized_contrast="high"
 " let g:solarized_visibility="high"
 " colorscheme solarized
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-256
 
 filetype plugin indent on      " load the plugin and indent settings for the detected filetype
 " runtime! macros/matchit.vim    " % to bounce from do to end etc.
@@ -195,12 +195,12 @@ nnoremap <Down> gj
 nnoremap <Up> gk
 vnoremap <Down> gj
 vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
 
 " do not menu with left / right in command line
-cnoremap <Left> <Space><BS><Left>
-cnoremap <Right> <Space><BS><Right>
+" cnoremap <Left> <Space><BS><Left>
+" cnoremap <Right> <Space><BS><Right>
 
 " Tagbar
 map <Leader>rt :TagbarToggle<CR>
