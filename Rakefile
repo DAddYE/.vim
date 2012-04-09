@@ -28,7 +28,6 @@ vim_plugin_task 'jade',             'git://github.com/digitaltoad/vim-jade.git'
 vim_plugin_task 'scala',            'git://github.com/rosstimson/scala-vim-support.git'
 vim_plugin_task 'powerline',        'git://github.com/Lokaltog/vim-powerline.git'
 vim_plugin_task 'tagbar',           'git://github.com/majutsushi/tagbar.git'
-vim_plugin_task 'tomorrow',         'git://github.com/chriskempson/vim-tomorrow-theme.git'
 
 vim_plugin_task 'nginx' do
   sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'
@@ -36,6 +35,10 @@ end
 
 vim_plugin_task 'css3' do
   sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=15153 > syntax/css3.vim'
+end
+
+vim_plugin_task 'tomorrow' do
+  sh 'curl -sL https://raw.github.com/chriskempson/vim-tomorrow-theme/dev/colors/Tomorrow.vim > colors/tomorrow.vim'
 end
 
 vim_plugin_task 'pong' do

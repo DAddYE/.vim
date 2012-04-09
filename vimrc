@@ -42,14 +42,19 @@ set ttyfast " Optimize for fast terminal connections
 set isk+=_,$,@,%,#,- " none word dividers
 
 " Colors & C.
-set guioptions=aAce
 set background=dark         " Assume a dark background
+colorscheme tomorrow
+
+" Make bolds match gui version
+hi Statement	cterm=bold
+hi Type       cterm=bold
+
+
 " let g:solarized_termtrans=1
 " let g:solarized_termcolors=256
 " let g:solarized_contrast="high"
 " let g:solarized_visibility="high"
 " colorscheme solarized
-colorscheme Tomorrow-Night
 
 filetype plugin indent on      " load the plugin and indent settings for the detected filetype
 " runtime! macros/matchit.vim    " % to bounce from do to end etc.
@@ -99,20 +104,8 @@ au FileType python set softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=1
 
-
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
-
-" NerdTREE config
-let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=0
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
-let NERDTreeHijackNetrw=0
-
-" Save on lost focus
-autocmd BufLeave,FocusLost * silent! wall
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
@@ -177,11 +170,11 @@ vmap > >gv
 vmap < <gv
 map <Leader>n :NERDTreeToggle<CR>
 map <C-e> <Esc><C-e>i
-map <C-h> gT
-map <C-l> gt
+map <C-S-Left> gT
+map <C-S-Right> gt
+map <C-t> :tabe<CR>
 map gc :!git add . && git commit -a && git push<CR>
 map zz :ZoomWin<CR>
-map bb :!bash --login<CR>
 map gs :Gstatus<CR>
 map gp :Git push<CR>
 map rr :redraw! \| :NERDTree<CR>
@@ -211,4 +204,4 @@ map rt :TagbarToggle<CR>
 " vnoremap p "_dp
 " use :w!! to write to a file using sudo if you forgot to 'sudo vim file'
 " (it will prompt for sudo password when writing)
-cmap W %!sudo tee > /dev/null %
+cmap W!! %!sudo tee > /dev/null %
