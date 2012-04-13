@@ -1,26 +1,19 @@
 # Verbatim copy of janus
 
 module VIM
-  Dirs = %w[ after autoload doc compiler plugin snippets syntax syntax_checkers ftdetect ftplugin colors indent nerdtree_plugin ]
+  Dirs    = %w[ after autoload doc compiler plugin snippets syntax syntax_checkers ftdetect ftplugin colors indent nerdtree_plugin ]
+  VERSION = `vim --version`.scan(/VIM - Vi IMproved (\d)\.(\d)/).flatten.map(&:to_i)
+  TmpDirs = %w[ tmp/repos tmp/backup tmp/swap ]
 end
 
 directory 'tmp'
 
-VIM::Dirs.each do |dir|
-  directory dir
-end
-
-%w[backup swap repos].each do |dir|
-  directory "tmp/#{dir}"
-end
-
-def vim_version
-  @_version ||= `vim --version`.scan(/VIM - Vi IMproved (\d)\.(\d)/).flatten.map(&:to_i)
-end
+VIM::Dirs.each    { |dir| directory dir }
+VIM::TmpDirs.each { |dir| directory dir }
 
 def vim_plugin_task(name, repo=nil)
-  cwd = File.expand_path('../', __FILE__)
-  dir = File.expand_path("tmp/repos/#{name}")
+  cwd     = File.expand_path('../', __FILE__)
+  dir     = File.expand_path("tmp/repos/#{name}")
   subdirs = VIM::Dirs
 
   namespace(name) do
@@ -83,11 +76,7 @@ def vim_plugin_task(name, repo=nil)
       end
 
       task :pull => dir do
-        if repo =~ /git$/
-          Dir.chdir dir do
-            sh "git pull"
-          end
-        end
+        sh "cd #{dir} && git pull" if repo =~ /git$/
       end
 
       task :install => [:pull] + subdirs do
@@ -117,7 +106,7 @@ def vim_plugin_task(name, repo=nil)
   desc "Install #{name} plugin"
   task name do
     puts
-    puts "*#{"Installing #{name}".center(38)}*"
+    puts "\e[32m Installing #{name} \e[0m".center(40, '*')
     puts
     Rake::Task["#{name}:install"].invoke
   end
@@ -147,6 +136,7 @@ end
 desc 'Cleanup vim directories and local changes'
 task :clean do
   VIM::Dirs.each { |dir| sh "rm -rf #{dir}" }
+  sh 'rm -rf tmp'
   sh 'git clean -dfx'
 end
 
@@ -155,10 +145,7 @@ task :pull do
   sh 'git pull origin master --force'
 end
 
-task :default => [
-  :update_docs,
-  :link_vimrc
-]
+task :default => [:update_docs, :link_vimrc] + VIM::TmpDirs
 
 desc 'Clear out all build artifacts and rebuild the latest Janus'
 task :upgrade => [:clean, :default]

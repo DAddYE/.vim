@@ -2,6 +2,7 @@ set nocompatible
 syntax on
 set nospell
 set number
+set numberwidth=5
 
 set nocursorcolumn
 set nocursorline
@@ -25,7 +26,7 @@ set matchtime=3
 set showbreak=↪
 set splitbelow
 set splitright
-set fillchars=diff:⣿,vert:│
+set fillchars=vert:\ " nicer on our term
 set autowrite
 set shiftround
 set autoread
@@ -74,7 +75,7 @@ set background=dark
 colorscheme tomorrow
 
 " Make bolds match gui version
-hi Statement	cterm=bold
+hi Statement  cterm=bold
 hi Type       cterm=bold
 
 
@@ -85,7 +86,7 @@ hi Type       cterm=bold
 " colorscheme solarized
 
 filetype plugin indent on      " load the plugin and indent settings for the detected filetype
-" runtime! macros/matchit.vim    " % to bounce from do to end etc.
+" runtime! macros/matchit.vim  " % to bounce from do to end etc.
 
 " Change mapleader
 let mapleader=","
@@ -227,6 +228,7 @@ map <C-t> :tabe<CR>
 map gc :!git add . && git commit -a && git push<CR>
 map zz :ZoomWin<CR>
 map gs :Gstatus<CR>
+map gd :Gdiff<CR>
 map gp :Git push<CR>
 map rr :redraw! \| :NERDTree<CR>
 map cc :nohlsearch<CR>
