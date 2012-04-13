@@ -1,12 +1,17 @@
 # Verbatim copy of janus
 
 module VIM
-  Dirs = %w[ after autoload doc compiler plugin snippets syntax syntax_checkers ftdetect ftplugin colors indent backup nerdtree_plugin ]
+  Dirs = %w[ after autoload doc compiler plugin snippets syntax syntax_checkers ftdetect ftplugin colors indent nerdtree_plugin ]
 end
 
-directory "tmp"
+directory 'tmp'
+
 VIM::Dirs.each do |dir|
-  directory(dir)
+  directory dir
+end
+
+%w[backup swap repos].each do |dir|
+  directory "tmp/#{dir}"
 end
 
 def vim_version
@@ -14,51 +19,46 @@ def vim_version
 end
 
 def vim_plugin_task(name, repo=nil)
-  cwd = File.expand_path("../", __FILE__)
-  dir = File.expand_path("tmp/#{name}")
+  cwd = File.expand_path('../', __FILE__)
+  dir = File.expand_path("tmp/repos/#{name}")
   subdirs = VIM::Dirs
 
   namespace(name) do
     if repo
-      file dir => "tmp" do
-        if repo =~ /git$/
-          sh "git clone #{repo} #{dir}"
+      file dir => 'tmp/repos' do
 
-        elsif repo =~ /download_script/
+        case repo
+        when /git$/
+          sh "git clone #{repo} #{dir}"
+        when /download_script/
           if filename = `curl --silent --head #{repo} | grep attachment`[/filename=(.+)/,1]
             filename.strip!
-            sh "curl #{repo} > tmp/#{filename}"
+            sh "curl -sL #{repo} > tmp/repos/#{filename}"
           else
             raise ArgumentError, 'unable to determine script type'
           end
-
-        elsif repo =~ /(tar|gz|vba|zip)$/
+        when /(tar|gz|vba|zip)$/
           filename = File.basename(repo)
-          sh "curl #{repo} > tmp/#{filename}"
-
+          sh "curl #{repo} > tmp/repos/#{filename}"
         else
           raise ArgumentError, 'unrecognized source url for plugin'
         end
 
         case filename
         when /zip$/
-          sh "unzip -o tmp/#{filename} -d #{dir}"
-
+          sh "unzip -o tmp/repos/#{filename} -d #{dir}"
         when /tar\.gz$/
           dirname  = File.basename(filename, '.tar.gz')
-
-          sh "tar zxvf tmp/#{filename}"
+          sh "tar zxvf tmp/repos/#{filename}"
           sh "mv #{dirname} #{dir}"
-
         when /vba(\.gz)?$/
           if filename =~ /gz$/
-            sh "gunzip -f tmp/#{filename}"
+            sh "gunzip -f tmp/repos/#{filename}"
             filename = File.basename(filename, '.gz')
           end
 
           # TODO: move this into the install task
-          mkdir_p dir
-          lines = File.readlines("tmp/#{filename}")
+          lines = File.readlines("tmp/repos/#{filename}")
           current = lines.shift until current =~ /finish$/ # find finish line
 
           while current = lines.shift
@@ -117,9 +117,7 @@ def vim_plugin_task(name, repo=nil)
   desc "Install #{name} plugin"
   task name do
     puts
-    puts "*" * 40
     puts "*#{"Installing #{name}".center(38)}*"
-    puts "*" * 40
     puts
     Rake::Task["#{name}:install"].invoke
   end
@@ -130,13 +128,13 @@ def skip_vim_plugin(name)
   Rake::Task[:default].prerequisites.delete(name)
 end
 
-desc "Update the documentation"
+desc 'Update the documentation'
 task :update_docs do
-  puts "Updating VIM Documentation..."
+  puts 'Updating VIM Documentation...'
   system "vim -e -s <<-EOF\n:helptags ~/.vim/doc\n:quit\nEOF"
 end
 
-desc "link vimrc to ~/.vimrc"
+desc 'link vimrc to ~/.vimrc'
 task :link_vimrc do
   %w[ vimrc gvimrc ].each do |file|
     dest = File.expand_path("~/.#{file}")
@@ -146,14 +144,15 @@ task :link_vimrc do
   end
 end
 
+desc 'Cleanup vim directories and local changes'
 task :clean do
   VIM::Dirs.each { |dir| sh "rm -rf #{dir}" }
-  sh "git clean -dfx"
+  sh 'git clean -dfx'
 end
 
-desc "Pull the latest"
+desc 'Pull the latest'
 task :pull do
-  sh "git pull origin master --force"
+  sh 'git pull origin master --force'
 end
 
 task :default => [
@@ -161,5 +160,5 @@ task :default => [
   :link_vimrc
 ]
 
-desc "Clear out all build artifacts and rebuild the latest Janus"
+desc 'Clear out all build artifacts and rebuild the latest Janus'
 task :upgrade => [:clean, :default]

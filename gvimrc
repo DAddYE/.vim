@@ -2,9 +2,6 @@ set anti
 set guioptions=gemc " egmrt
 " set transparency=5
 
-" Automatically resize splits when resizing MacVim window
-autocmd VimResized * wincmd =
-
 " Fullscreen takes up entire screen
 " set fuoptions=maxhorz,maxvert
 

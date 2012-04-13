@@ -38,7 +38,7 @@ vim_plugin_task 'css3' do
 end
 
 vim_plugin_task 'tomorrow' do
-  sh 'curl -sL https://raw.github.com/chriskempson/vim-tomorrow-theme/dev/colors/Tomorrow.vim > colors/tomorrow.vim'
+  sh 'curl -sL https://raw.github.com/daddye/vim-tomorrow-theme/dev/colors/Tomorrow.vim > colors/tomorrow.vim'
 end
 
 vim_plugin_task 'pong' do
