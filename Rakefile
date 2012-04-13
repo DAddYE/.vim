@@ -28,6 +28,7 @@ vim_plugin_task 'jade',             'git://github.com/digitaltoad/vim-jade.git'
 vim_plugin_task 'scala',            'git://github.com/rosstimson/scala-vim-support.git'
 vim_plugin_task 'powerline',        'git://github.com/Lokaltog/vim-powerline.git'
 vim_plugin_task 'tagbar',           'git://github.com/majutsushi/tagbar.git'
+vim_plugin_task 'vitality',         'https://github.com/sjl/vitality.vim.git'
 
 vim_plugin_task 'nginx' do
   sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'

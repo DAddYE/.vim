@@ -232,8 +232,7 @@ map rr :redraw! \| :NERDTree<CR>
 map cc :nohlsearch<CR>
 map tt :NERDTreeToggle<CR>
 map rt :TagbarToggle<CR>
-nmap kk :q<CR>                 " kill window
-nmap <leader>ff ggVG=            " format the entire file
+nmap <leader>ff ggVG=          " format the entire file
 nmap <leader>i :set list!<cr> " toggle [i]nvisible characters
 
 " Map the arrow keys to be based on display lines, not physical lines
