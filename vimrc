@@ -26,7 +26,7 @@ set matchtime=3
 set showbreak=↪
 set splitbelow
 set splitright
-set fillchars=vert:\ " nicer on our term
+set fillchars=vert:\ " empty is nicer on our term
 set autowrite
 set shiftround
 set autoread
@@ -95,16 +95,6 @@ let mapleader=","
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-" NERDTree configuration
-let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=0
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-let NERDTreeHijackNetrw=1
-map <Leader>n :NERDTreeToggle<CR>
-au vimenter * if !argc() | NERDTree | endif
-
 " Save when losing focus
 au FocusLost * :silent! wall
 "
@@ -121,9 +111,8 @@ let g:ctrlp_working_path_mode = 0
 au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal! g`\"" | endif
 
-" make uses real tabs
-au FileType make set noexpandtab
-au FileType * set expandtab
+au FileType make set noexpandtab " make uses real tabs"
+au FileType *    set expandtab   " others not
 
 " Thorfile, Rakefile, GuardFile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,Do,dorc,Dofile,config.ru} set ft=ruby
@@ -149,8 +138,21 @@ let g:JSLintHighlightErrorLine = 0
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
+
+" Stop fucking netrw
+let g:netrw_silent=1
+let g:netrw_quiet=1
+let g:loaded_netrw=1
+
 " NERDTree configuration
-" autocmd vimenter * if !argc() | NERDTree | endif
+let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=0
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
+let NERDTreeHijackNetrw=0
+ca cd NERDTree
+
 augroup AuNERDTreeCmd
   au VimEnter    * call s:CdIfDirectory(expand("<amatch>"))
   au FocusGained * call s:UpdateNERDTree()
