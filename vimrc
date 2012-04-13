@@ -206,15 +206,6 @@ endfunction
 imap <C-w> <Esc><C-w> " move through windows in insert mode
 imap <C-v> <Esc><C-v> " allow block selection in insert mode
 
-
-" Map alt+s as save
-map ß :w<CR>
-imap ß <Esc>:w<CR>i
-
-" Map alt+w as close window
-map Ω :q<CR>
-imap Ω :q<CR>
-
 " Keep visual mode during indenting
 vmap > >gv
 vmap < <gv
