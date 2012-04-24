@@ -11,7 +11,7 @@ directory 'tmp'
 VIM::Dirs.each    { |dir| directory dir }
 VIM::TmpDirs.each { |dir| directory dir }
 
-def vim_plugin_task(name, repo=nil)
+def bundle(name, repo=nil)
   cwd     = File.expand_path('../', __FILE__)
   dir     = File.expand_path("tmp/repos/#{name}")
   subdirs = VIM::Dirs
@@ -21,9 +21,8 @@ def vim_plugin_task(name, repo=nil)
       file dir => 'tmp/repos' do
 
         case repo
-        when /git$/
-          sh "git clone #{repo} #{dir}"
-        when /download_script/
+        when /download_script/, /^\d+$/
+          repo = "http://www.vim.org/scripts/download_script.php?src_id=#{repo}" if repo =~ /^\d+$/
           if filename = `curl --silent --head #{repo} | grep attachment`[/filename=(.+)/,1]
             filename.strip!
             sh "curl -sL #{repo} > tmp/repos/#{filename}"
@@ -34,7 +33,9 @@ def vim_plugin_task(name, repo=nil)
           filename = File.basename(repo)
           sh "curl #{repo} > tmp/repos/#{filename}"
         else
-          raise ArgumentError, 'unrecognized source url for plugin'
+          repo = "git://github.com/#{repo}" unless repo =~ /^(git|http(s)?)/
+          repo << ".git" unless repo =~ /\.git$/
+          sh "git clone #{repo} #{dir}"
         end
 
         case filename
@@ -113,7 +114,7 @@ def vim_plugin_task(name, repo=nil)
   task :default => name
 end
 
-def skip_vim_plugin(name)
+def skip_bundle(name)
   Rake::Task[:default].prerequisites.delete(name)
 end
 

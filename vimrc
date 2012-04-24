@@ -20,7 +20,7 @@ set expandtab
 set ruler
 set nowrap
 set list
-set listchars=tab:▸\ ,trail:·
+set listchars=tab:\ ·,trail:·
 set lazyredraw
 set matchtime=3
 set showbreak=↪
@@ -36,6 +36,8 @@ set incsearch
 set ignorecase
 set smartcase
 set laststatus=2
+" set visualbell "No sounds please!!!
+
 
 set clipboard+=unnamed " Share your clipboard with system
 set mouse=a            " Make mouse working!
@@ -57,7 +59,8 @@ set directory=~/.vim/tmp/swap/        " where to put swap files.
 set backupskip=/tmp/*,/private/tmp/*  " make Vim able to edit crontab files again.
 set backup                            " enable backups
 set noswapfile                        " It's 2012, Vim.
-" set undodir=~/.vim/undo/
+set undodir=~/.vim/undo/
+set undofile
 
 set nostartofline " Don’t reset cursor to start of line when moving around.
 set esckeys " Allow cursor keys in insert mode
@@ -75,9 +78,8 @@ set background=dark
 colorscheme tomorrow
 
 " Make bolds match gui version
-hi Statement  cterm=bold
-hi Type       cterm=bold
-
+hi! Statement  cterm=bold
+hi! Type       cterm=bold
 
 " let g:solarized_termtrans=1
 " let g:solarized_termcolors=256
@@ -130,27 +132,30 @@ augroup Nginx
 augroup END
 
 " Enable syntastic syntax checking
-let g:syntastic_enable_signs   =1
-let g:syntastic_quiet_warnings =1
+let g:syntastic_enable_signs   = 1
+let g:syntastic_quiet_warnings = 1
 
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
 " Powerline
-let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols       = 'fancy'
+let g:Powerline_cache_enabled = 0
+" let g:Powerline_theme='skwp'
+" let g:Powerline_colorscheme='skwp'
 
 " Stop fucking netrw
-let g:netrw_silent=1
-let g:netrw_quiet=1
-let g:loaded_netrw=1
+let g:netrw_silent = 1
+let g:netrw_quiet  = 1
+let g:loaded_netrw = 1
 
 " NERDTree configuration
-let NERDTreeQuitOnOpen=0   " don't collapse NERDTree when a file is opened
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=0
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-let NERDTreeHijackNetrw=0
+let NERDTreeQuitOnOpen  = 0   " don't collapse NERDTree when a file is opened
+let NERDTreeMinimalUI   = 1
+let NERDTreeDirArrows   = 0
+let NERDTreeChDirMode   = 2
+let NERDTreeIgnore      = ['\.pyc$', '\.rbc$', '\~$']
+let NERDTreeHijackNetrw = 0
 ca cd NERDTree
 
 augroup AuNERDTreeCmd
@@ -216,6 +221,9 @@ vmap < <gv
 map <C-S-Left> gT
 map <C-S-Right> gt
 map <C-t> :tabe<CR>
+imap <C-S-Left> <ESC>gT
+imap <C-S-Right> <ESC>gt
+imap <C-t> <ESC>:tabe<CR>
 
 " Some personal shortcuts
 map gc :!git add . && git commit -a && git push<CR>
