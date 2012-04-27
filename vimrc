@@ -75,7 +75,7 @@ set ttimeoutlen=10
 
 " Colors & C.
 set background=dark
-colorscheme tomorrow
+colorscheme Tomorrow
 
 " Make bolds match gui version
 hi! Statement  cterm=bold
