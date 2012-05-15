@@ -1,10 +1,13 @@
 require File.expand_path('../bundle.rb', __FILE__)
 
+bundle 'tomorrow',    'DAddYE/vim-tomorrow-theme'
+bundle 'nerdtree',    'scrooloose/nerdtree'
+bundle 'cmdp',        'kien/ctrlp.vim'
+bundle 'powerline',   'Lokaltog/vim-powerline'
 bundle 'ack',         'mileszs/ack.vim'
 bundle 'haml',        'tpope/vim-haml'
 bundle 'slim',        'bbommarito/vim-slim'
 bundle 'javascript',  'pangloss/vim-javascript'
-bundle 'nerdtree',    'scrooloose/nerdtree'
 bundle 'commentary',  'tpope/vim-commentary'
 bundle 'supertab',    'ervandew/supertab'
 bundle 'cucumber',    'tpope/vim-cucumber'
@@ -18,24 +21,19 @@ bundle 'solarized',   'altercation/vim-colors-solarized'
 bundle 'fugitive',    'tpope/vim-fugitive'
 bundle 'tabular',     'godlygeek/tabular'
 bundle 'surround',    'tpope/vim-surround'
-bundle 'cmdp',        'kien/ctrlp.vim'
 bundle 'less.js',     'lunaru/vim-less'
 bundle 'task_paper',  'davidoc/taskpaper.vim'
 bundle 'minitest',    'sunaku/vim-ruby-minitest'
 bundle 'zoomwin',     'blueyed/ZoomWin'
 bundle 'jade',        'digitaltoad/vim-jade'
-bundle 'powerline',   'Lokaltog/vim-powerline'
 bundle 'tagbar',      'majutsushi/tagbar'
 bundle 'vitality',    'sjl/vitality.vim'
-bundle 'tomorrow',    'DAddYE/vim-tomorrow-theme'
 bundle 'smart-input', 'kana/vim-smartinput'
+bundle 'html5',       'DAddYE/html5.vim'
+bundle 'css3',        'hail2u/vim-css3-syntax'
 
 bundle 'nginx' do
   sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'
-end
-
-bundle 'css3' do
-  sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=15153 > syntax/css3.vim'
 end
 
 bundle 'ar.snippets' do

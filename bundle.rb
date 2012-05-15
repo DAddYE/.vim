@@ -35,7 +35,7 @@ def bundle(name, repo=nil)
         else
           repo = "git://github.com/#{repo}" unless repo =~ /^(git|http(s)?)/
           repo << ".git" unless repo =~ /\.git$/
-          sh "git clone #{repo} #{dir}"
+          sh "git clone --recursive #{repo} #{dir}"
         end
 
         case filename
@@ -77,7 +77,7 @@ def bundle(name, repo=nil)
       end
 
       task :pull => dir do
-        sh "cd #{dir} && git pull" if File.exist?("#{dir}/.git")
+        sh "cd #{dir} && git pull && git submodule foreach git pull origin master" if File.exist?("#{dir}/.git")
       end
 
       task :install => [:pull] + subdirs do
@@ -93,9 +93,8 @@ def bundle(name, repo=nil)
               end
             end
           end
+          yield if block_given?
         end
-
-        yield if block_given?
       end
     else
       task :install => subdirs do

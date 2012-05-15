@@ -38,7 +38,6 @@ set smartcase
 set laststatus=2
 " set visualbell "No sounds please!!!
 
-
 set clipboard+=unnamed " Share your clipboard with system
 set mouse=a            " Make mouse working!
 set modeline
@@ -141,8 +140,8 @@ let g:JSLintHighlightErrorLine = 0
 " Powerline
 let g:Powerline_symbols       = 'fancy'
 let g:Powerline_cache_enabled = 0
-" let g:Powerline_theme='skwp'
-" let g:Powerline_colorscheme='skwp'
+" let g:Powerline_theme         = 'skwp'
+" let g:Powerline_colorscheme   = 'skwp'
 
 " Stop fucking netrw
 let g:netrw_silent = 1
