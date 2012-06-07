@@ -35,7 +35,7 @@ def bundle(name, repo=nil)
         else
           repo = "git://github.com/#{repo}" unless repo =~ /^(git|http(s)?)/
           repo << ".git" unless repo =~ /\.git$/
-          sh "git clone --recursive #{repo} #{dir}"
+          sh "git clone #{repo} #{dir}"
         end
 
         case filename

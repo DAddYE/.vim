@@ -53,6 +53,7 @@ set showcmd " Show (partial) command in the status line"
 set showmode
 set completefunc=syntaxcomplete#Complete " Minitest autocompletion
 
+set history=1000                      " Store lots of :cmdline history
 set backupdir=~/.vim/tmp/backup/      " where to put backup files.
 set directory=~/.vim/tmp/swap/        " where to put swap files.
 set backupskip=/tmp/*,/private/tmp/*  " make Vim able to edit crontab files again.
@@ -92,7 +93,7 @@ filetype plugin indent on      " load the plugin and indent settings for the det
 " Change mapleader
 let mapleader=","
 
-" Verical bar in insert mode
+" Verical bar in insert mode (for iTerm users only)
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
@@ -112,8 +113,8 @@ let g:ctrlp_working_path_mode = 0
 au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
       \| exe "normal! g`\"" | endif
 
-au FileType make set noexpandtab " make uses real tabs"
 au FileType *    set expandtab   " others not
+au FileType make set noexpandtab " make uses real tabs"
 
 " Thorfile, Rakefile, GuardFile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,Do,dorc,Dofile,config.ru} set ft=ruby
@@ -219,10 +220,14 @@ vmap < <gv
 " Tab movements & creation
 map <C-S-Left> gT
 map <C-S-Right> gt
-map <C-t> :tabe<CR>
 imap <C-S-Left> <ESC>gT
 imap <C-S-Right> <ESC>gt
-imap <C-t> <ESC>:tabe<CR>
+
+" Resize windows with arrow keys
+nnoremap <D-Up> <C-w>+
+nnoremap <D-Down> <C-w>-
+nnoremap <D-Left> <C-w><
+nnoremap <D-Right>  <C-w>>
 
 " Some personal shortcuts
 map gc :!git add . && git commit -a && git push<CR>
@@ -234,8 +239,8 @@ map rr :redraw! \| :NERDTree<CR>
 map cc :nohlsearch<CR>
 map tt :NERDTreeToggle<CR>
 map rt :TagbarToggle<CR>
-nmap <leader>ff ggVG=          " format the entire file
-nmap <leader>i :set list!<cr> " toggle [i]nvisible characters
+nmap <leader>ff ggVG=         " format the entire file
+nmap <leader>i :set list!<CR> " toggle [i]nvisible characters
 
 " Map the arrow keys to be based on display lines, not physical lines
 nmap <Down> gj
@@ -246,5 +251,9 @@ vmap <Up> gk
 " imap <Down> <C-o>gj
 " imap <Up> <C-o>gk
 
-" Use :W!! to write to a file using sudo if you forgot to 'sudo vim file'
-cmap W!! %!sudo tee > /dev/null %
+" CtrlP
+" Additional mapping for buffer search
+nmap <leader>t :CtrlPBufferTag<CR>
+
+" Use :W! to write to a file using sudo if you forgot to 'sudo vim file'
+cmap W! %!sudo tee > /dev/null %

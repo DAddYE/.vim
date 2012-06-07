@@ -31,10 +31,7 @@ bundle 'vitality',    'sjl/vitality.vim'
 bundle 'smart-input', 'kana/vim-smartinput'
 bundle 'html5',       'DAddYE/html5.vim'
 bundle 'css3',        'hail2u/vim-css3-syntax'
-
-bundle 'nginx' do
-  sh 'curl -sL http://www.vim.org/scripts/download_script.php?src_id=14376 > syntax/nginx.vim'
-end
+bundle 'nginx',       'andersjanmyr/nginx-vim-syntax'
 
 bundle 'ar.snippets' do
   sh 'mkdir -p snippets/ruby'

@@ -1,9 +1,7 @@
 set anti
 set guioptions=gemc " egmrt
+set guifont=Ubuntu\ Mono\ for\ Powerline:h14
 " set transparency=5
-
-" Fullscreen takes up entire screen
-" set fuoptions=maxhorz,maxvert
 
 " Remap tabs
 macmenu &File.New\ Tab key=<D-t>
