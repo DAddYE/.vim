@@ -77,7 +77,7 @@ def bundle(name, repo=nil)
       end
 
       task :pull => dir do
-        sh "cd #{dir} && git pull && git submodule foreach git pull origin master" if File.exist?("#{dir}/.git")
+        sh "cd #{dir} && git pull" if File.exist?("#{dir}/.git")
       end
 
       task :install => [:pull] + subdirs do
