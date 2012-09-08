@@ -1,7 +1,9 @@
 set anti
 set guioptions=gemc " egmrt
-set guifont=Ubuntu\ Mono\ for\ Powerline:h14
+set guifont=Liberation\ Mono:h12
+set vb
 " set transparency=5
+
 
 " Remap tabs
 macmenu &File.New\ Tab key=<D-t>
@@ -9,15 +11,32 @@ macmenu &File.Open\ Tab\.\.\. key=<D-^>
 
 " Command-Return for fullscreen
 macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
+
+" Next and previous tab
 macmenu Window.Select\ Next\ Tab Key=<S-D-Right>
 macmenu Window.Select\ Previous\ Tab key=<S-D-Left>
 
+" CTRLP Mappings
+macmenu &File.Print key=<D-M-p>
+map <D-p> :CtrlP<CR>
+imap <D-p> <ESC>:CtrlP<CR>
+map <D-P> :CtrlPBuffer<CR>
+imap <D-P> <ESC>:CtrlPBuffer<CR>
+
+" Bubble single lines
+nmap <D-Up> [e
+nmap <D-Down> ]e
+nmap <D-k> [e
+nmap <D-j> ]e
+
+" Bubble multiple lines
+vmap <D-Up> [egv
+vmap <D-Down> ]egv
+vmap <D-k> [egv
+vmap <D-j> ]egv
+
 " Command-Shift-F for Ack
 map <D-F> :Ack<space>
-
-" Command-/ to toggle comments
-" map <D-/> <Leader><Leader>
-" imap <D-/> <Leader><Leader>
 
 " Map command-[ and command-] to indenting or outdenting
 " while keeping the original selection in visual mode

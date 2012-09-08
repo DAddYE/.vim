@@ -137,12 +137,6 @@ desc 'Cleanup vim directories and local changes'
 task :clean do
   VIM::Dirs.each { |dir| sh "rm -rf #{dir}" }
   sh 'rm -rf tmp'
-  sh 'git clean -dfx'
-end
-
-desc 'Pull the latest'
-task :pull do
-  sh 'git pull origin master --force'
 end
 
 task :default => [:update_docs, :link_vimrc] + VIM::TmpDirs

@@ -36,7 +36,6 @@ set incsearch
 set ignorecase
 set smartcase
 set laststatus=2
-" set visualbell "No sounds please!!!
 
 set clipboard+=unnamed " Share your clipboard with system
 set mouse=a            " Make mouse working!
@@ -73,6 +72,9 @@ set notimeout
 set ttimeout
 set ttimeoutlen=10
 
+" Write better
+set cc=100
+
 " Colors & C.
 set background=dark
 colorscheme Tomorrow
@@ -80,6 +82,12 @@ colorscheme Tomorrow
 " Make bolds match gui version
 hi! Statement  cterm=bold
 hi! Type       cterm=bold
+
+" IndentGuides <leader>ig
+let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=1
+hi IndentGuidesOdd  guibg=#2b2b2b ctermbg=0
+hi IndentGuidesEven guibg=#3a3838 ctermbg=10
 
 " let g:solarized_termtrans=1
 " let g:solarized_termcolors=256
@@ -91,7 +99,7 @@ filetype plugin indent on      " load the plugin and indent settings for the det
 " runtime! macros/matchit.vim  " % to bounce from do to end etc.
 
 " Change mapleader
-let mapleader=","
+" let mapleader=","
 
 " Verical bar in insert mode (for iTerm users only)
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -108,6 +116,11 @@ let g:task_paper_date_format = "%d/%m/%y %H:%M"
 
 " Ctrlp
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store'
+  \ }
+
 
 " remember last location in file, but not for commit messages.
 au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
@@ -118,6 +131,9 @@ au FileType make set noexpandtab " make uses real tabs"
 
 " Thorfile, Rakefile, GuardFile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Guardfile,Vagrantfile,Thorfile,Do,dorc,Dofile,config.ru} set ft=ruby
+
+" Be sure to don't open markdown files with modula2 syntax
+au BufRead,BufNewFile *.md set ft=markdown
 
 " add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
@@ -156,58 +172,12 @@ let NERDTreeDirArrows   = 0
 let NERDTreeChDirMode   = 2
 let NERDTreeIgnore      = ['\.pyc$', '\.rbc$', '\~$']
 let NERDTreeHijackNetrw = 0
+let g:nerdtree_tabs_startup_cd=1
+let g:nerdtree_tabs_open_on_console_startup=1
 ca cd NERDTree
 
-augroup AuNERDTreeCmd
-  au VimEnter    * call s:CdIfDirectory(expand("<amatch>"))
-  au FocusGained * call s:UpdateNERDTree()
-augroup END
-
-" If the parameter is a directory, cd into it
-function s:CdIfDirectory(directory)
-  let explicitDirectory = isdirectory(a:directory)
-  let directory = explicitDirectory || empty(a:directory)
-
-  if explicitDirectory
-    exe "cd " . fnameescape(a:directory)
-  endif
-
-  " Allows reading from stdin
-  " ex: git diff | mvim -R -
-  if strlen(a:directory) == 0
-    return
-  endif
-
-  if directory
-    NERDTree
-    wincmd p
-    bd
-  endif
-
-  if explicitDirectory
-    wincmd p
-  endif
-endfunction
-
-" NERDTree utility function
-function s:UpdateNERDTree(...)
-  let stay = 0
-
-  if(exists("a:1"))
-    let stay = a:1
-  end
-
-  if exists("t:NERDTreeBufName")
-    let nr = bufwinnr(t:NERDTreeBufName)
-    if nr != -1
-      exe nr . "wincmd w"
-      exe substitute(mapcheck("R"), "<CR>", "", "")
-      if !stay
-        wincmd p
-      end
-    endif
-  endif
-endfunction
+" Macvim from here
+let macvim_hig_shift_movement = 1
 
 " Shortcuts
 imap <C-w> <Esc><C-w> " move through windows in insert mode
@@ -224,7 +194,7 @@ imap <C-S-Left> <ESC>gT
 imap <C-S-Right> <ESC>gt
 
 " Resize windows with arrow keys
-nnoremap <D-Up> <C-w>+
+" nnoremap <D-Up> <C-w>+
 nnoremap <D-Down> <C-w>-
 nnoremap <D-Left> <C-w><
 nnoremap <D-Right>  <C-w>>
@@ -238,7 +208,7 @@ map gp :Git push<CR>
 map rr :redraw! \| :NERDTree<CR>
 map cc :nohlsearch<CR>
 map tt :NERDTreeToggle<CR>
-map rt :TagbarToggle<CR>
+map tb :TagbarToggle<CR>
 nmap <leader>ff ggVG=         " format the entire file
 nmap <leader>i :set list!<CR> " toggle [i]nvisible characters
 
