@@ -1,6 +1,6 @@
 require File.expand_path('../bundle.rb', __FILE__)
 
-bundle 'tomorrow',      'DAddYE/tomorrow.vim'
+bundle 'soda',          'DAddYE/soda.vim'
 bundle 'nerdtree',      'scrooloose/nerdtree'
 bundle 'nerdtree-tabs', 'jistr/vim-nerdtree-tabs'
 bundle 'cmdp',          'kien/ctrlp.vim'
