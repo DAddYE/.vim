@@ -10,4 +10,5 @@ Here the basic usage.
 Rake will install plugins and setup two symlinks. That's all.
 
 XoXo
+
 [DAddYE](https://github.com/DAddYE)
