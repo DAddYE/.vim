@@ -51,6 +51,7 @@ set wildignore+=*.swp,*~,._*
 set showcmd " Show (partial) command in the status line"
 set showmode
 set completefunc=syntaxcomplete#Complete " Minitest autocompletion
+set ofu=syntaxcomplete#complete " omnicomplete
 
 set history=1000                      " Store lots of :cmdline history
 set backupdir=~/.vim/tmp/backup/      " where to put backup files.
@@ -66,6 +67,7 @@ set esckeys " Allow cursor keys in insert mode
 set ttyfast " Optimize for fast terminal connections
 set isk+=_,$,@,%,#,- " none word dividers
 
+
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
 set notimeout
@@ -77,23 +79,17 @@ set cc=100
 
 " Colors & C.
 set background=dark
-colorscheme Tomorrow
+colorscheme soda
 
 " Make bolds match gui version
-hi! Statement  cterm=bold
-hi! Type       cterm=bold
+" hi! Statement  cterm=bold
+" hi! Type       cterm=bold
 
 " IndentGuides <leader>ig
-let g:indent_guides_auto_colors=0
-let g:indent_guides_enable_on_vim_startup=1
-hi IndentGuidesOdd  guibg=#2b2b2b ctermbg=0
-hi IndentGuidesEven guibg=#3a3838 ctermbg=10
+let g:indent_guides_auto_colors=1
+let g:indent_guides_enable_on_vim_startup=0
+" hi IndentGuidesOdd  guibg=#f1f1f1 ctermbg=255
 
-" let g:solarized_termtrans=1
-" let g:solarized_termcolors=256
-" let g:solarized_contrast="high"
-" let g:solarized_visibility="high"
-" colorscheme solarized
 
 filetype plugin indent on      " load the plugin and indent settings for the detected filetype
 " runtime! macros/matchit.vim  " % to bounce from do to end etc.
@@ -111,15 +107,18 @@ au FocusLost * :silent! wall
 " Resize splits when the window is resized
 au VimResized * :wincmd =
 
+" Set current chdir
+au VimEnter * silent! cd %:p:h
+
 " Taskspaper
 let g:task_paper_date_format = "%d/%m/%y %H:%M"
 
 " Ctrlp
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-  \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store'
-  \ }
+      \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+      \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store'
+      \ }
 
 
 " remember last location in file, but not for commit messages.
@@ -157,8 +156,8 @@ let g:JSLintHighlightErrorLine = 0
 " Powerline
 let g:Powerline_symbols       = 'fancy'
 let g:Powerline_cache_enabled = 0
-" let g:Powerline_theme         = 'skwp'
-" let g:Powerline_colorscheme   = 'skwp'
+let g:Powerline_theme         = 'solarized256'
+let g:Powerline_colorscheme   = 'solarized256'
 
 " Stop fucking netrw
 let g:netrw_silent = 1
@@ -166,15 +165,15 @@ let g:netrw_quiet  = 1
 let g:loaded_netrw = 1
 
 " NERDTree configuration
-let NERDTreeQuitOnOpen  = 0   " don't collapse NERDTree when a file is opened
+" let NERDTreeQuitOnOpen  = 0   " don't collapse NERDTree when a file is opened
 let NERDTreeMinimalUI   = 1
 let NERDTreeDirArrows   = 0
-let NERDTreeChDirMode   = 2
+let NERDTreeChDirMode   = 0
 let NERDTreeIgnore      = ['\.pyc$', '\.rbc$', '\~$']
 let NERDTreeHijackNetrw = 0
-let g:nerdtree_tabs_startup_cd=1
-let g:nerdtree_tabs_open_on_console_startup=1
-ca cd NERDTree
+let g:nerdtree_tabs_startup_cd=0
+" let g:nerdtree_tabs_open_on_console_startup=0
+" ca cd NERDTree
 
 " Macvim from here
 let macvim_hig_shift_movement = 1
@@ -193,12 +192,6 @@ map <C-S-Right> gt
 imap <C-S-Left> <ESC>gT
 imap <C-S-Right> <ESC>gt
 
-" Resize windows with arrow keys
-" nnoremap <D-Up> <C-w>+
-nnoremap <D-Down> <C-w>-
-nnoremap <D-Left> <C-w><
-nnoremap <D-Right>  <C-w>>
-
 " Some personal shortcuts
 map gc :!git add . && git commit -a && git push<CR>
 map zz :ZoomWin<CR>
@@ -213,17 +206,24 @@ nmap <leader>ff ggVG=         " format the entire file
 nmap <leader>i :set list!<CR> " toggle [i]nvisible characters
 
 " Map the arrow keys to be based on display lines, not physical lines
-nmap <Down> gj
-nmap <Up> gk
-vmap <Down> gj
-vmap <Up> gk
+" nmap <Down> gj
+" nmap <Up> gk
+" vmap <Down> gj
+" vmap <Up> gk
 " This slow down mvim
 " imap <Down> <C-o>gj
 " imap <Up> <C-o>gk
 
 " CtrlP
 " Additional mapping for buffer search
-nmap <leader>t :CtrlPBufferTag<CR>
+map <C-l> :CtrlPBufTag<CR>
+imap <C-l> <ESC>:CtrlPBufTag<CR>
+
+map <C-k> :CtrlPBuffer<CR>
+imap <C-k> <ESC>:CtrlPBuffer<CR>
+
+" Standard CtrlP also in insert mode
+imap <C-p> <ESC>:CtrlP<CR>
 
 " Use :W! to write to a file using sudo if you forgot to 'sudo vim file'
-cmap W! %!sudo tee > /dev/null %
+ca W! %!sudo tee > /dev/null %

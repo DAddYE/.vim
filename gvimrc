@@ -1,9 +1,15 @@
 set anti
 set guioptions=gemc " egmrt
-set guifont=Liberation\ Mono:h12
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 set vb
-" set transparency=5
 
+" NerdTree Tabs
+let g:nerdtree_tabs_open_on_gui_startup=0
+
+" Colors & C.
+" colorscheme soda
+
+" set transparency=5
 
 " Remap tabs
 macmenu &File.New\ Tab key=<D-t>
@@ -34,6 +40,12 @@ vmap <D-Up> [egv
 vmap <D-Down> ]egv
 vmap <D-k> [egv
 vmap <D-j> ]egv
+
+" Resize windows with arrow keys
+" nnoremap <D-Up> <C-w>+
+" nnoremap <D-Down> <C-w>-
+" nnoremap <D-Left> <C-w><
+" nnoremap <D-Right>  <C-w>>
 
 " Command-Shift-F for Ack
 map <D-F> :Ack<space>
